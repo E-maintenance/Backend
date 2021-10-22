@@ -15,6 +15,7 @@ public class AutoCareApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AutoCareApplication.class, args);
 	}
+
 	@Bean
 	CommandLineRunner initDatabase(RoleRepository roleRepository) {
 		return args -> {
@@ -25,5 +26,5 @@ public class AutoCareApplication {
 
 		};
 	}
-	
+
 }
