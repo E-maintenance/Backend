@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<h1 th:text="${workshop.username}"></h1>
+
+<h1> PASSn INN PASS OUT </h1>
+
+<form th:action="@{/feeds}" method="get">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Profile Card</h5>
+            <p th:text="${workshop.shopName}" class="card-text"></p>
+            <p th:text="${workshop.category}" class="card-text"></p>
+            <p th:text="${workshop.location}" class="card-text"></p>
+            <button type="submit" th:name="action" th:value="in">Add FEED</button>
+        </div>
+    </div>
+</form>
+<div th:each="feed:${feeds}" class="feed">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">FEED</h5>
+            <h6 th:text="${feed.feeds}" class="card-subtitle mb-2 text-muted"></h6>
+            <h6 th:text="${feed.image}" class="card-subtitle mb-2 text-muted"></h6>
+            <p th:text="${feed.createdAt}" class="card-text"></p>
+            <input th:action="@{/feeds}" type="submit" value="Submit"/>
+            <input type="submit" value="Submit"/>
+
+        </div>
+    </div>
+</div>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+
+</body>
+</html>
