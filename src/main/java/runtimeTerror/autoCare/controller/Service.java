@@ -14,4 +14,13 @@ public class Service {
     public String ser() {
         return "servicepage";
     }
+
+    @GetMapping("/rent")
+    public String rent() {
+        return "rentpage";
+    }
+    @GetMapping("/rentnow")
+    public String rentcar() {
+        return "rentnow";
+    }
 }
