@@ -23,6 +23,7 @@ public class Post {
         this.createdAt = createdAt;
     }
 
+
     public String getBody() {
         return body;
     }
