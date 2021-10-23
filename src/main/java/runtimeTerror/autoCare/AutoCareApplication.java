@@ -13,8 +13,7 @@ import runtimeTerror.autoCare.repository.RoleRepository;
 public class AutoCareApplication {
 	private static final Logger log = LoggerFactory.getLogger(AutoCareApplication.class);
 	public static void main(String[] args) {
-		SpringApplication.run(AutoCareApplication.class, args);
-	}
+		SpringApplication.run(AutoCareApplication.class, args);	}
 
 	@Bean
 	CommandLineRunner initDatabase(RoleRepository roleRepository) {
