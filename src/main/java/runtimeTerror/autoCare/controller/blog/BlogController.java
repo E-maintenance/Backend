@@ -58,7 +58,7 @@ public class BlogController {
         return "addPost";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/blog/edit/{id}")
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
         Post post = postRepository.findPostById(id).orElseThrow(() -> new IllegalArgumentException("Invalid post Id:" + id));
 
@@ -66,7 +66,7 @@ public class BlogController {
         return "update-post";
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/blog/update/{id}")
     public String updateUser(@PathVariable("id") long id, Post post,
                              BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -78,7 +78,7 @@ public class BlogController {
         return "redirect:/blog";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/blog/delete/{id}")
     public String deleteUser(@PathVariable("id") long id, Model model) {
         Post post = postRepository.findPostById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid post Id:" + id));
