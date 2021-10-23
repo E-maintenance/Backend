@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<form method="POST" th:action="@{shop-update/feed.id}" th:object="${workshop}">
+  <h3> Update Feed </h3>
+  <div><label for="feeds"> Write Your Feed :  <input id="feeds" type="text" th:field="*{workshop.feeds}"></label></div>
+  <div><label for="image"> Share Your Image :  <input id="image" type="text" th:field="*{workshop.image}"></label></div>
+  <div><input type="submit" value="Submit"/></div>
+
+</form>
+</body>
+</html>

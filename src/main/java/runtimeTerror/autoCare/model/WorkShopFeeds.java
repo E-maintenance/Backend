@@ -40,6 +40,11 @@ public class WorkShopFeeds {
         this.workShop = workShop;
     }
 
+    public WorkShopFeeds(String feeds, String image) {
+        this.feeds = feeds;
+        this.image = image;
+    }
+
     public String getFeeds() {
         return feeds;
     }
@@ -79,4 +84,6 @@ public class WorkShopFeeds {
     public void setId(Long id) {
         this.id = id;
     }
+
+
 }
