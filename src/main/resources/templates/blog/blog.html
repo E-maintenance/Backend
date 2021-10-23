@@ -25,10 +25,10 @@
                 <p ><span th:text="${post.body}"></span></p>
                 <p >Created at: <span th:text="${post.createdAt}"></span></p>
                 <form >
-                    <a th:href="'/edit/' + ${id}" class="btn btn-primary" style="background-color:#3D0000; margin-left:47.5%;border: #F9F3DF;">Edit</a >
+                    <a th:href="'/blog/edit/' + ${id}" class="btn btn-primary" style="background-color:#3D0000; margin-left:47.5%;border: #F9F3DF;">Edit</a >
                 </form>
                 <form >
-                    <a th:href="'/delete/' + ${id}" class="btn btn-primary" style="background-color:#3D0000; margin-left:47.5%;border: #F9F3DF;">Delete</a >
+                    <a th:href="'/blog/delete/' + ${id}" class="btn btn-primary" style="background-color:#3D0000; margin-left:47.5%;border: #F9F3DF;">Delete</a >
                 </form>
             </div>
         </div>

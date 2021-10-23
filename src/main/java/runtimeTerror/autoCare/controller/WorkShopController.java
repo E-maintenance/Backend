@@ -29,6 +29,7 @@ public class WorkShopController {
     @GetMapping("/shopProfile")
     public String viewProfile(@PathVariable String username, Model model) {
 
+
         WorkShop workShop = workShopRepository.findWorkShopByUsername(username);
         List<WorkShopFeeds> feeds = workShopFeedsRepository.findWorkShopById(workShop.getId()).orElseThrow();
         model.addAttribute("workshop", workShop);
@@ -53,19 +54,19 @@ public class WorkShopController {
         return new RedirectView("/shopProfile");
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/workshop/edit/{id}")
     public String getForm(@PathVariable Long id, Model model ){
         List<WorkShopFeeds> workShopFeeds = workShopFeedsRepository.findWorkShopById(id).orElseThrow();
         model.addAttribute("workshopFeeds", workShopFeeds );
         return "feeds";
     }
-    @PostMapping("/update/{id}")
+    @PostMapping("/workshop/update/{id}")
     public String updateForm(@PathVariable("id") Long id , @ModelAttribute WorkShopFeeds workShopFeeds){
         workShopFeedsRepository.save(workShopFeeds);
         return "redirect:/shopProfile";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/workshop/delete/{id}")
     public String deleteFeed(@PathVariable("id") Long id,Model model){
         List<WorkShopFeeds> workShopFeeds= workShopFeedsRepository.findWorkShopById(id).orElseThrow();
         workShopFeedsRepository.deleteWorkShopById(id);
