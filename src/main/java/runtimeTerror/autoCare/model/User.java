@@ -16,7 +16,7 @@ public class User implements UserDetails {
     private Long id;
 
     private  String fullname;
-
+    private boolean isVerified=false;
     @Column(unique = true)
     private  String username;
 
@@ -44,7 +44,6 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-
     public String getFullname() {
         return fullname;
     }
@@ -54,6 +53,13 @@ public class User implements UserDetails {
     }
 
 
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean verified) {
+        isVerified = verified;
+    }
 
     @Override
     public boolean isAccountNonExpired() {

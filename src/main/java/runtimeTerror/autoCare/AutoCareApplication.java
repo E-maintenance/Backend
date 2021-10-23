@@ -23,7 +23,6 @@ public class AutoCareApplication {
 			log.info("Preloading " + roleRepository.save(new Role("CUSTOMER")));
 			log.info("Preloading " + roleRepository.save(new Role("WORKSHOP")));
 
-
 		};
 	}
 }
