@@ -1,5 +1,4 @@
 /* Variables */
-
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +12,7 @@ body {
   display: grid;
   place-items: center;
   padding: 1.5rem 1rem;
-
+inline-block: none;
   color: var(--text);
   background-color: var(--background);
 
@@ -41,11 +40,13 @@ body {
   z-index: 1;
   bottom: calc(var(--top) * -1);
   cursor: pointer;
-  font-size: 50px
-  border-radius: 15px
+  font-size: 25px;
+  border-radius: 15px;
 }
 
 .profile__img {
+  position: relative;
+  right: 110px;
   width: 600px;
   height: 400px
 
@@ -55,13 +56,13 @@ body {
   margin-top: -5px;
   letter-spacing: 1px;
    font-size: 15px;
-    text-align: center
-  color: var(--primary);
+    text-align: center;
+color :#000 ;
 }
 
 .profile__occupation {
   font-size: 20px;
-  text-align: center
+  text-align: center;
   letter-spacing: -1px;
   margin: 8px 0;
 }
