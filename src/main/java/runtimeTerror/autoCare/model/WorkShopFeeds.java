@@ -85,5 +85,4 @@ public class WorkShopFeeds {
         this.id = id;
     }
 
-
 }

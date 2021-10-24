@@ -35,19 +35,19 @@ public class WorkShopController {
 
     @GetMapping("/shop-signup")
     public String signUp() {
-        return "workShop/signup";
+        return "workShop/loginSignup";
     }
 
     @PostMapping("/shop-signup")
     public String attemptSignUp(WorkShop workShop) {
         workShop.setPassword(passwordEncoder.encode(workShop.getPassword()));
         workShopRepository.save(workShop);
-        return ("redirect:/workShop/login");
+        return ("redirect:/shop-signup#");
     }
 
-    @GetMapping("/workShop/login")
+    @GetMapping("/shop-signup#")
     public String login() {
-        return "workShop/login";
+        return "workShop/loginSignup";
     }
 
     @PostMapping ("/shop-login")
