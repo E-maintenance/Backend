@@ -1,17 +1,4 @@
 /* Variables */
-:root {
-  --h: 357; /*change this value to see different colors*/
-  --background: hsl(var(--h), 0%, 97%);
-  --primary: hsl(var(--h), 56%, 53%);
-  --text: hsl(var(--h), 56%, 3%);
-  --card: hsl(var(--h), 0%, 100%);
-
-  --green: hsl(133, 69%, 68%);
-  --green-light: hsl(133, 69%, 92%);
-  --shadow: 0px 48px 100px rgba(16, 12, 45, 0.15);
-
-  --top: 65px;
-}
 
 * {
   margin: 0;
@@ -47,7 +34,7 @@ body {
   color: white;
   letter-spacing: 1px;
   height: 50px;
-  width: 100%;
+  width: 120%;
   background: var(--primary);
   position: absolute;
   bottom: 0;
@@ -59,9 +46,9 @@ body {
 }
 
 .profile__img {
-  max-width: 600px;
-  max-height: 700px
-  
+  width: 600px;
+  height: 400px
+
 }
 
 .profile__name {
