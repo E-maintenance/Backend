@@ -1,0 +1,80 @@
+/* Variables */
+:root {
+  --h: 357; /*change this value to see different colors*/
+  --background: hsl(var(--h), 0%, 97%);
+  --primary: hsl(var(--h), 56%, 53%);
+  --text: hsl(var(--h), 56%, 3%);
+  --card: hsl(var(--h), 0%, 100%);
+
+  --green: hsl(133, 69%, 68%);
+  --green-light: hsl(133, 69%, 92%);
+  --shadow: 0px 48px 100px rgba(16, 12, 45, 0.15);
+
+  --top: 65px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem 1rem;
+
+  color: var(--text);
+  background-color: var(--background);
+
+  font-family: "Lato", sans-serif;
+}
+
+.profile {
+  text-align: center;
+  width: 25%;
+  position: relative;
+
+}
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  color: white;
+  letter-spacing: 1px;
+  height: 50px;
+  width: 100%;
+  background: var(--primary);
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  bottom: calc(var(--top) * -1);
+  cursor: pointer;
+  font-size: 50px
+  border-radius: 15px
+}
+
+.profile__img {
+  max-width: 600px;
+  max-height: 700px
+  
+}
+
+.profile__name {
+  margin-top: -5px;
+  letter-spacing: 1px;
+   font-size: 15px;
+    text-align: center
+  color: var(--primary);
+}
+
+.profile__occupation {
+  font-size: 20px;
+  text-align: center
+  letter-spacing: -1px;
+  margin: 8px 0;
+}
