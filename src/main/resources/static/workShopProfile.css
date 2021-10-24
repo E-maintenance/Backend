@@ -12,10 +12,9 @@ body {
   display: grid;
   place-items: center;
   padding: 1.5rem 1rem;
-inline-block: none;
+  inline-block: none;
   color: var(--text);
   background-color: var(--background);
-
   font-family: "Lato", sans-serif;
 }
 
@@ -55,9 +54,9 @@ inline-block: none;
 .profile__name {
   margin-top: -5px;
   letter-spacing: 1px;
-   font-size: 15px;
-    text-align: center;
-color :#000 ;
+  font-size: 15px;
+  text-align: center;
+  color :#000 ;
 }
 
 .profile__occupation {
