@@ -66,7 +66,7 @@ public class WorkShopController {
         List<WorkShopFeeds> feeds = workShopFeedsRepository.findWorkShopFeedsById(workShop.getId()).orElseThrow();
         model.addAttribute("workShop", workShop);
         model.addAttribute("feeds", feeds);
-        return "workShop/shopProfile";
+        return "workShop/workShopProfile";
     }
 
     @GetMapping("/feeds")

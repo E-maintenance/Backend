@@ -7,6 +7,11 @@
     <title>Title</title>
 </head>
 <body>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+
 <form th:action="@{/feeds}" method="get">
     <h1 th:text="${workShop.username}"></h1>
     <div class="card" style="width: 18rem;">
@@ -19,14 +24,16 @@
         </div>
     </div>
 </form>
+
+
+
 <div th:each="feed:${feeds}" class="feed">
-    <div class="card" style="width: 18rem;">
+    <div class="card" style="width: 40rem;">
         <div class="card-body">
             <h5 class="card-title">FEED</h5>
             <h6 th:text="${feed.feeds}" class="card-subtitle mb-2 text-muted"></h6>
             <img th:src="${feed.image}"  alt="" src="">
             <p th:text="${feed.createAt}" class="card-text"></p>
-
             <a th:href="@{|/shop-edit/${feed.id}|}">Update</a>
             <a th:href="@{|/shop-delete/${feed.id}|}">Delete</a>
 
@@ -34,9 +41,8 @@
     </div>
 </div>
 
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
+
+
 
 </body>
 </html>
