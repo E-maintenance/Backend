@@ -27,8 +27,6 @@ public class WorkShop implements UserDetails {
     private List<WorkShopFeeds> feeds;
 
 
-
-
     public WorkShop() {
     }
 
