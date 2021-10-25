@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import runtimeTerror.autoCare.dto.UserRegistrationDto;
+import runtimeTerror.autoCare.model.blog.Review;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -27,8 +28,12 @@ public class User implements UserDetails {
     private  String phone;
     private String password;
 
+    @OneToOne(mappedBy = "user")
+    private Review review;
+
     public User() {
     }
+
     public User(UserRegistrationDto userRegistrationDto) {
         this.fullname = userRegistrationDto.getFullname();
         this.username = userRegistrationDto.getUserName();
@@ -48,6 +53,12 @@ public class User implements UserDetails {
     }
 
 
+    public User(String fullname, String username, String email, Review review) {
+        this.fullname = fullname;
+        this.username = username;
+        this.email = email;
+        this.review = review;
+    }
 
     public String getFullname() {
         return fullname;
@@ -55,6 +66,16 @@ public class User implements UserDetails {
 
     public void setFullname(String fullname) {
         this.fullname = fullname;
+    }
+
+
+
+    public Review getReview() {
+        return review;
+    }
+
+    public void setReview(Review review) {
+        this.review = review;
     }
 
 
