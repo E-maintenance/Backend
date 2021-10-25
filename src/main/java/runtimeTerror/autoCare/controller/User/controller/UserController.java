@@ -1,13 +1,15 @@
 package runtimeTerror.autoCare.controller.User.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import runtimeTerror.autoCare.controller.admin.controller.EmailServiceImpl;
 import runtimeTerror.autoCare.dto.UserRegistrationDto;
 import runtimeTerror.autoCare.model.Role;
@@ -94,10 +96,10 @@ public class UserController {
        }
     }
 
-    @GetMapping("/")
-    public String index() {
-        return "home";
-    }
+//    @GetMapping("/")
+//    public String index() {
+//        return "home";
+//    }
 
     @GetMapping("/User/register/verification/{token}")
     public String verificationEmail(Model m, @PathVariable String token){
