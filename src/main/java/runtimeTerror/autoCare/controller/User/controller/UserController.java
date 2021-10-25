@@ -13,12 +13,16 @@ import runtimeTerror.autoCare.dto.UserRegistrationDto;
 import runtimeTerror.autoCare.model.Role;
 import runtimeTerror.autoCare.model.User;
 import runtimeTerror.autoCare.model.Verification;
+import runtimeTerror.autoCare.model.WorkShop;
 import runtimeTerror.autoCare.repository.RoleRepository;
 import runtimeTerror.autoCare.repository.UserRepository;
 import runtimeTerror.autoCare.repository.VerifiedRepository;
+import runtimeTerror.autoCare.repository.WorkShopRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.security.Principal;
+import java.util.List;
 
 
 @Controller
@@ -37,6 +41,9 @@ public class UserController {
 
     @Autowired
     EmailServiceImpl service;
+
+    @Autowired
+    WorkShopRepository workShopRepository;
 
     @GetMapping("/User/register")
     public String registerAdmin(Model model){
@@ -106,6 +113,14 @@ public class UserController {
         user.setVerified(true);
         userRepository.save(user);
         return "User/auth/login";
+    }
+
+    @GetMapping("/User/appointment")
+    public String getAppointment(Model model){
+      List<WorkShop> shops= workShopRepository.findAll();
+
+        model.addAttribute("Shops",shops);
+        return "/appointment/appointment";
     }
 
 
