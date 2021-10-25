@@ -1,15 +1,16 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
   <title>Car Rent &mdash; Free Website Template by Colorlib</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <link href="https://fonts.googleapis.com/css?family=DM+Sans:300,400,700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="fonts/icomoon/style.css">
-
+  <script src="signature_pad.js"></script>
   <link rel="stylesheet" href="rentcss/bootstrap.min.css">
   <link rel="stylesheet" href="rentcss/bootstrap-datepicker.css">
   <link rel="stylesheet" href="rentcss/jquery.fancybox.min.css">
@@ -63,54 +64,181 @@
       </div>
       <div class="row">
         <div class="col-lg-8 mb-5" >
-          <form action="#" method="post">
+          <form method="POST" th:action="@{/payment}" >
             <div class="form-group row">
               <div class="col-md-6 mb-4 mb-lg-0">
-                <input type="text" class="form-control" placeholder="First name">
+                <label for="firstname"  id="firstname" ></label>
+                <input type="text" name="firstname" class="form-control" placeholder="First name" required>
               </div>
               <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="First name">
+                <label for="secondename" id="secondename"></label>
+                <input type="text"  name="secondename" class="form-control" placeholder="secondename" required>
               </div>
             </div>
 
             <div class="form-group row">
               <div class="col-md-12">
-                <input type="text" class="form-control" placeholder="Email address">
+                <label for="email" id="email"></label>
+                <input type="text" name="email" class="form-control" placeholder="Email address" required>
               </div>
             </div>
 
             <div class="form-group row">
               <div class="col-md-12">
-                <textarea name="" id="" class="form-control" placeholder="Write your message." cols="30" rows="10"></textarea>
+                <label for="phonnumber" id="phonnumber"></label>
+                <input type="text" name="phonnumber" class="form-control" placeholder="phone number" required>
               </div>
             </div>
+
             <div class="form-group row">
-              <div class="col-md-6 mr-auto">
-                <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="Send Message">
+              <div class="col-md-12">
+                <label for="address" id="address"></label>
+                <input type="text" name="address" class="form-control" placeholder=" address" required>
               </div>
             </div>
+
+            <div class="form-group row">
+              <div class="col-md-12">
+                <label for="nationalityID" id="nationalityID"></label>
+                <input type="text" name="nationalityID" class="form-control" placeholder="nationalityID" required >
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-12">
+                <label for="DOB" id="DOB"></label>
+                <input type="text" name="DOB" class="form-control" placeholder="Date Of Birth" required>
+              </div>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+              <label  for="flexCheckIndeterminate" class="icon-money">
+               Cash Only
+              </label>
+
+
+              <div id="credit-card" class="tab-pane fade show active pt-3">
+
+              <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
+                <!-- Credit card form tabs -->
+                <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
+                  <li class="nav-item">
+                        <label for="fname" id="fname" class="nav-link active ">Accepted Cards</label>
+                        <div class="icon-container">
+                          <i class="fa fa-cc-visa" style="color:navy;"></i>
+                          <i class="fa fa-cc-amex" style="color:blue;"></i>
+                          <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                          <i class="fa fa-cc-discover" style="color:orange;"></i>
+                        </div>
+
+
+                  </li>
+                </ul>
+              </div>
+
+
+
+                <div class="form-group"> <label for="name"  id="name">
+                <h6>Card Owner</h6>
+              </label> <input type="text" name="name" placeholder="Card Owner Name"  class="form-control "> </div>
+              <div class="form-group"> <label for="cardnumber" id="cardnumber">
+                <h6>Card number</h6>
+              </label>
+                <div class="input-group"> <input type="text" name="cardnumber" placeholder="Valid card number" class="form-control " >
+                  <div class="input-group-append"> <span class="input-group-text text-muted"> <i class="fab fa-cc-visa mx-1"></i> <i class="fab fa-cc-mastercard mx-1"></i> <i class="fab fa-cc-amex mx-1"></i> </span> </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-8">
+                  <div class="form-group"> <label for="date" id="date"  ><span class="hidden-xs" >
+                                                    <h6>Expiration Date</h6>
+                                                </span></label>
+                    <div class="input-group"> <input type="text" placeholder="dd/MM/yy" name="date" class="form-control" > </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group mb-4"> <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
+                    <h6>CVV <i class="fa fa-question-circle d-inline"></i></h6>
+                  </label> <input type="text"  class="form-control"> </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <input type="submit" class="subscribe btn btn-primary btn-block shadow-sm" value="Confirm Payment" >
+              </div>
+            </div>
+              <div id="signature-pad" class="m-signature-pad">
+                <div class="m-signature-pad--body">
+                  <canvas></canvas>
+                  <input type="hidden" name="signature" id="signature" value="">
+                </div>
+              </div>
           </form>
+
+
         </div>
-        <div class="col-lg-4 ml-auto">
-          <div class="bg-white p-3 p-md-5">
-            <h3 class="text-black mb-4">Contact Info</h3>
-            <ul class="list-unstyled footer-link">
-              <li class="d-block mb-3">
-                <span class="d-block text-black">Address:</span>
-                <span>34 Street Name, Amman, Jordan</span></li>
-              <li class="d-block mb-3"><span class="d-block text-black">Phone:</span><span>+1 242 4942 290</span></li>
-              <li class="d-block mb-3"><span class="d-block text-black">Email:</span><span>info@yourdomain.com</span></li>
-            </ul>
-          </div>
-        </div>
+
       </div>
     </div>
   </div>
 
 
+<div>
+<!--  <form method="POST" th:action="@{/payment}" >-->
+<!--    <label for="name">First name:</label><br>-->
+<!--    <input type="text" id="name" name="fname" ><br>-->
+<!--    <label for="cardnumber">cardnumber:</label><br>-->
+<!--    <input type="text" id="cardnumber" name="cardnumber" ><br><br>-->
+<!--    <input type="submit" value="Submit">-->
+<!--  </form>-->
 </div>
+  <form  th:href="@{/detales}">
+
+    <div th:each="post : ${username}" style="border-style: solid;border-radius: 15px;border-width: medium; width:50%;text-align:center;margin-left:47%;margin-bottom:2%;">
+      <div >
+        <div >
+
+          <p ><span th:text="${post.name}"></span></p>
+          <p ><span th:text="${post.cardnumber}"></span></p>
+          <p ><span th:text="${post.date}"></span></p>
+          <p ><span th:text="${post.firstname}"></span></p>
+          <p ><span th:text="${post.secondename}"></span></p>
+          <p ><span th:text="${post.email}"></span></p>
+          <p ><span th:text="${post.phonnumber}"></span></p>
+          <p ><span th:text="${post.address}"></span></p>
+          <p ><span th:text="${post.nationalityID}"></span></p>
+          <p ><span th:text="${post.DOB}"></span></p>
+
+          <td><a th:href="@{/delete/{id}(id=${post.id})}">Delete</a></td>-->
 
 
+
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+
+<!-- Large modal -->
+
+
+
+<!--<p class="lead">All posts </p>-->
+<!--<form >-->
+<!--  <a th:href="@{/card}" class="btn btn-primary" style="background-color:#3D0000; margin-left:47.5%;border: #F9F3DF;">Add Post</a >-->
+<!--</form>-->
+<!--<div th:each="post : ${user.payment}" style="border-style: solid;border-radius: 15px;border-width: medium; width:50%;text-align:center;margin-left:47%;margin-bottom:2%;">-->
+<!--  <div >-->
+<!--    <div >-->
+<!--      <p ><span th:text="${post.cardnumber}"></span></p>-->
+<!--&lt;!&ndash;      <p >Created at: <span th:text="${post.createdAt}"></span></p>&ndash;&gt;-->
+
+<!--    </div>-->
+<!--  </div>-->
+
+</div>
+</div>
 
 </body>
 

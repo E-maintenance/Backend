@@ -23,4 +23,5 @@ public class Service {
     public String rentcar() {
         return "rentnow";
     }
+
 }
