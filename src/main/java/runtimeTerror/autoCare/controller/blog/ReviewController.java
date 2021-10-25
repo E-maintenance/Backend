@@ -31,7 +31,7 @@ public class ReviewController {
         User user = userRepository.findUserByUsername(principal.getName());
         model.addAttribute("user",user);
         model.addAttribute("principal", principal.getName());
-        return "reviews";
+        return "/blog/reviews";
     }
 
     @PostMapping("/reviews")
@@ -56,7 +56,7 @@ public class ReviewController {
         User user =  userRepository.findUserByUsername(principal.getName());
         model.addAttribute("user",user);
 
-        return "addReview";
+        return "/blog/addReview";
     }
 
 //    @GetMapping("/blog/edit/{id}")

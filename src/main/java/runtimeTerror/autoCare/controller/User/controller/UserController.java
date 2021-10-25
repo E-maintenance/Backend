@@ -2,6 +2,9 @@ package runtimeTerror.autoCare.controller.User.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -65,7 +68,7 @@ public class UserController {
         service.sendSimpleEmail(user.getEmail(),request.getRequestURL().toString()+"/verification/"+verified.getToken(),"please verified Email");
         verifiedRepository.save(verified);
         roleRepository.save(role);
-        return "redirect:/User/register?success";
+        return "redirect:/User/login";
     }
 
     @GetMapping("/User/login")
@@ -83,6 +86,8 @@ public class UserController {
            System.out.println(x);
            System.out.println(y);
            if(BCrypt.checkpw(x, y)){
+               Authentication authentication = new UsernamePasswordAuthenticationToken(usertest, null, usertest.getAuthorities());
+               SecurityContextHolder.getContext().setAuthentication(authentication);
                return "redirect:/";
            }
            else{
@@ -94,10 +99,7 @@ public class UserController {
        }
     }
 
-    @GetMapping("/")
-    public String index() {
-        return "home";
-    }
+
 
     @GetMapping("/User/register/verification/{token}")
     public String verificationEmail(Model m, @PathVariable String token){
