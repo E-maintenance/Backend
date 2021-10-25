@@ -18,7 +18,7 @@
 <div class="profile">
 
     <img src="https://cutewallpaper.org/21/workshop-wallpapers/Free-download-Abandoned-Car-Workshop-by-shadothezombie-.jpg" alt="Thomas smiling" class="profile__img">
-    <form th:action="@{/feeds}" method="get">
+    <form th:action="@{/feeds}"  method="get">
     <div class="profile__occupation">UserName :<h1 th:text="${workShop.username}"></h1></div>
         <br>
     <div class="profile__name">  ShopName : <p th:text="${workShop.shopName}" class="card-text"></p></div>
@@ -31,19 +31,26 @@
 </form>
 </div>
 <br> <br><br>
-<div th:each="feed:${feeds}" class="feed">
+
+
+<div th:each="workShopFeed:${workShopFeeds}" class="feed">
     <div class="card" style="width: 40rem;">
         <div class="card-body">
             <h5 class="card-title">FEED</h5>
-            <img th:src="${feed.image}"  alt="" src="">
-            <h6 th:text="${feed.feeds}" class="card-subtitle mb-2 text-muted"></h6>
-            <p th:text="${feed.createAt}" class="card-text"></p>
-            <a th:href="@{|/shop-edit/${feed.id}|}">Update</a>
-            <a th:href="@{|/shop-delete/${feed.id}|}">Delete</a>
-
+            <h6 th:text="${workShopFeed.feeds}" class="card-subtitle mb-2 text-muted"></h6>
+            <img th:src="${workShopFeed.image}"  alt="" src="">
+            <p th:text="${workShopFeed.createAt}" class="card-text"></p>
+            <a th:href="@{|/shop-edit/${workShopFeed.id}|}">Update</a>
+            <a th:href="@{|/shop-delete/${workShopFeed.id}|}">Delete</a>
         </div>
     </div>
 </div>
+
+
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
 
 </body>
 </html>

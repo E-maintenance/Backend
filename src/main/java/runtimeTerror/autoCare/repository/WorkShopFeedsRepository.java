@@ -12,8 +12,9 @@ import java.util.Optional;
 public interface WorkShopFeedsRepository extends JpaRepository<WorkShopFeeds, Long> {
 
     Optional< List<WorkShopFeeds> > findAllByWorkShop_Username(String username);
-    Optional< List<WorkShopFeeds> > findWorkShopFeedsById(Long id);
-    Optional< List<WorkShopFeeds> > deleteWorkShopFeedsById(Long id);
+    Optional < List<WorkShopFeeds>> findAllByWorkShop_Id(Long id);
+    Optional< WorkShopFeeds>  findWorkShopFeedsById(Long id);
+    Optional< WorkShopFeeds>  deleteWorkShopFeedsById(Long id);
 
 
 }
