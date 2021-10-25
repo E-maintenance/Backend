@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().disable()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
+                .antMatchers().permitAll()
                 .antMatchers("/admin/register").permitAll()
                 .antMatchers("/admin/login").permitAll()
                 .anyRequest().permitAll()
@@ -52,4 +52,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutSuccessUrl("/admin/login");
     }
+
 }
