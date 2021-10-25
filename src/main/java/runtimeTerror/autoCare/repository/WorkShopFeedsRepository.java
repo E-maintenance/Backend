@@ -14,7 +14,4 @@ public interface WorkShopFeedsRepository extends JpaRepository<WorkShopFeeds, Lo
     Optional< List<WorkShopFeeds> > findAllByWorkShop_Username(String username);
     Optional < List<WorkShopFeeds>> findAllByWorkShop_Id(Long id);
     Optional< WorkShopFeeds>  findWorkShopFeedsById(Long id);
-    Optional< WorkShopFeeds>  deleteWorkShopFeedsById(Long id);
-
-
 }
