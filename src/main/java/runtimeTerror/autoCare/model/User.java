@@ -1,11 +1,14 @@
 package runtimeTerror.autoCare.model;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import runtimeTerror.autoCare.dto.UserRegistrationDto;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -43,6 +46,8 @@ public class User implements UserDetails {
         this.password = password;
         this.role = role;
     }
+
+
 
     public String getFullname() {
         return fullname;
@@ -105,7 +110,11 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(role.getName()));
+        System.out.println("-------------------------------------------------------------------------");
+        System.out.println(role.getName());
+        return authorities;
     }
 
 

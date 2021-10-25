@@ -26,10 +26,14 @@ public class WorkShopController {
     WorkShopFeedsRepository workShopFeedsRepository;
 
 
+
+
+
+
+
+
     @GetMapping("/shopProfile")
     public String viewProfile(@PathVariable String username, Model model) {
-
-
         WorkShop workShop = workShopRepository.findWorkShopByUsername(username);
         List<WorkShopFeeds> feeds = workShopFeedsRepository.findWorkShopById(workShop.getId()).orElseThrow();
         model.addAttribute("workshop", workShop);
