@@ -1,5 +1,4 @@
 package runtimeTerror.autoCare.controller;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -52,7 +51,6 @@ public class WorkShopController {
 
     @PostMapping ("/shop-login")
     public String LoginPage(@RequestParam String username) {
-
         WorkShop workShop = workShopRepository.findWorkShopByUsername(username);
         Authentication authentication = new UsernamePasswordAuthenticationToken(workShop, null, new ArrayList<>());
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -98,8 +96,8 @@ public class WorkShopController {
 
         WorkShopFeeds workShopFeeds = workShopFeedsRepository.findWorkShopFeedsById(id).orElseThrow();
         System.out.println(workShopFeeds.getId());
-        model.addAttribute("workshop", workShopFeeds );
-        return "/workShop/updateFeed";
+        model.addAttribute("workShopFeeds", workShopFeeds );
+        return "workShop/updateFeed";
     }
 
     @PostMapping("/shop-update/{id}")
@@ -109,7 +107,11 @@ public class WorkShopController {
             workShopFeeds.setId(id);
             return "workShop/feeds";
         }
-        workShopFeedsRepository.save(workShopFeeds);
+        WorkShopFeeds oldWorkShopFeeds = workShopFeedsRepository.findWorkShopFeedsById(id).orElseThrow();
+        oldWorkShopFeeds.setFeeds(workShopFeeds.getFeeds());
+        oldWorkShopFeeds.setImage(workShopFeeds.getImage());
+
+        workShopFeedsRepository.save(oldWorkShopFeeds);
         return "redirect:/workShopProfile";
     }
 
@@ -117,7 +119,7 @@ public class WorkShopController {
     public String deleteFeed(@PathVariable("id") Long id, Model model){
         WorkShopFeeds workShopFeeds = workShopFeedsRepository.findWorkShopFeedsById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Feed Id:" + id));
-        workShopFeedsRepository.deleteWorkShopFeedsById(id).orElseThrow();
+        workShopFeedsRepository.deleteById(id);
         return "redirect:/workShopProfile";
     }
 

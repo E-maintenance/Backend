@@ -6,8 +6,8 @@
 </head>
 <body>
 
-<form method="POST" th:object="workShopFeeds" th:action="@{/shop-update/{id}(id=${workShopFeeds.id})}" >
-  <input type="hidden" >
+<form method="POST" th:object="${workShopFeeds}" th:action="@{/shop-update/{id}(id=${workShopFeeds.id})}" >
+<!--  <input type="text" th:field="*{id}">-->
 
   <h3> Update Feed </h3>
 <!--  <input type="text" th:field="*{firstName}" name="first" >-->
