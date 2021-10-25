@@ -1,11 +1,14 @@
 package runtimeTerror.autoCare.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class WorkShop {
+public class WorkShop implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -42,6 +45,44 @@ public class WorkShop {
         this.location = location;
     }
 
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+
     public List<WorkShopFeeds> getFeeds() {
         return feeds;
     }
@@ -50,16 +91,9 @@ public class WorkShop {
         this.feeds = feeds;
     }
 
-    public String getUsername() {
-        return username;
-    }
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setPassword(String password) {
@@ -93,5 +127,6 @@ public class WorkShop {
     public Long getId() {
         return id;
     }
+
 
 }
