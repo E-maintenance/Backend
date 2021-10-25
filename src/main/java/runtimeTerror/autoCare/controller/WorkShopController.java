@@ -55,25 +55,26 @@ public class WorkShopController {
         WorkShop workShop = workShopRepository.findWorkShopByUsername(username);
         Authentication authentication = new UsernamePasswordAuthenticationToken(workShop, null, new ArrayList<>());
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return ("redirect:/shopProfile");
+        return ("redirect:/workShopProfile");
     }
 
 
-    @GetMapping("/shopProfile")
+    @GetMapping("/workShopProfile")
     public String viewProfile(Model model) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         WorkShop workShop = workShopRepository.findWorkShopByUsername(userDetails.getUsername());
-        List<WorkShopFeeds> feeds = workShopFeedsRepository.findWorkShopFeedsById(workShop.getId()).orElseThrow();
+        List<WorkShopFeeds> workShopFeeds = workShopFeedsRepository.findAllByWorkShop_Id(workShop.getId()).orElseThrow();
         model.addAttribute("workShop", workShop);
-        model.addAttribute("feeds", feeds);
-        return "workShop/shopProfile";
+//        model.addAttribute("workShopFeeds", workShop.getFeeds());
+        model.addAttribute("workShopFeeds", workShopFeeds);
+        return "workShop/workShopProfile";
     }
 
     @GetMapping("/feeds")
-    public String getFeeds(@ModelAttribute WorkShopFeeds workShopFeeds, Model model) {
+    public String getFeeds(@ModelAttribute WorkShopFeeds workShopFeed, Model model) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<WorkShopFeeds> feeds = workShopFeedsRepository.findAllByWorkShop_Username(userDetails.getUsername()).orElseThrow();
-        model.addAttribute("feeds", feeds);
+        List<WorkShopFeeds> workShopFeeds = workShopFeedsRepository.findAllByWorkShop_Username(userDetails.getUsername()).orElseThrow();
+        model.addAttribute("workShopFeeds", workShopFeeds);
         return "workShop/feeds";
     }
 
@@ -82,16 +83,20 @@ public class WorkShopController {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         WorkShop workShop = workShopRepository.findWorkShopByUsername(userDetails.getUsername());
         feeds.setWorkShop(workShop);
-        workShopRepository.save(workShop);
+
         workShopFeedsRepository.save(feeds);
+        workShopRepository.save(workShop);
         workShop.setFeeds(Collections.singletonList(feeds));
-        return ("redirect:/shopProfile");
+        return ("redirect:/workShopProfile");
     }
 
     @GetMapping("/shop-edit/{id}")
     public String getForm(@PathVariable Long id, Model model ){
-        List<WorkShopFeeds> workShopFeeds = workShopFeedsRepository.findWorkShopFeedsById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid Feed Id:" + id));
+//        List<WorkShopFeeds> workShopFeeds = workShopFeedsRepository.findWorkShopFeedsById(id)
+//                .orElseThrow(() -> new IllegalArgumentException("Invalid Feed Id:" + id));
+
+        WorkShopFeeds workShopFeeds = workShopFeedsRepository.findWorkShopFeedsById(id).orElseThrow();
+        System.out.println(workShopFeeds.getId());
         model.addAttribute("workshop", workShopFeeds );
         return "/workShop/updateFeed";
     }
@@ -104,15 +109,15 @@ public class WorkShopController {
             return "workShop/feeds";
         }
         workShopFeedsRepository.save(workShopFeeds);
-        return "redirect:/shopProfile";
+        return "redirect:/workShopProfile";
     }
 
     @GetMapping("/shop-delete/{id}")
     public String deleteFeed(@PathVariable("id") Long id, Model model){
-        List<WorkShopFeeds> workShopFeeds = workShopFeedsRepository.findWorkShopFeedsById(id)
+        WorkShopFeeds workShopFeeds = workShopFeedsRepository.findWorkShopFeedsById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Feed Id:" + id));
         workShopFeedsRepository.deleteWorkShopFeedsById(id).orElseThrow();
-        return "redirect:/shopProfile";
+        return "redirect:/workShopProfile";
     }
 
 }

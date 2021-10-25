@@ -1,42 +1,46 @@
-<!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org" lang="en" >
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<form th:action="@{/feeds}" method="get">
-    <h1 th:text="${workShop.username}"></h1>
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Profile Card</h5>
-            <p th:text="${workShop.shopName}" class="card-text"></p>
-            <p th:text="${workShop.category}" class="card-text"></p>
-            <p th:text="${workShop.location}" class="card-text"></p>
-            <button type="submit" th:name="action" th:value="in">Add Feed</button>
-        </div>
-    </div>
-</form>
-<div th:each="feed:${feeds}" class="feed">
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">FEED</h5>
-            <h6 th:text="${feed.feeds}" class="card-subtitle mb-2 text-muted"></h6>
-            <img th:src="${feed.image}"  alt="" src="">
-            <p th:text="${feed.createAt}" class="card-text"></p>
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="https://www.thymeleaf.org" lang="en" >-->
+<!--<head>-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"-->
+<!--          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
 
-            <a th:href="@{|/shop-edit/${feed.id}|}">Update</a>
-            <a th:href="@{|/shop-delete/${feed.id}|}">Delete</a>
+<!--<form th:action="@{/logout}" method="post">-->
+<!--    <input type="submit" value="Sign Out"/>-->
+<!--</form>-->
 
-        </div>
-    </div>
-</div>
+<!--<form th:action="@{/feeds}" th:object="workShop" method="get">-->
+<!--    <h1 th:text="${workShop.username}"></h1>-->
+<!--    <div class="card" style="width: 18rem;">-->
+<!--        <div class="card-body">-->
+<!--            <h5 class="card-title">Profile Card</h5>-->
+<!--            <p th:text="${workShop.shopName}" class="card-text"></p>-->
+<!--            <p th:text="${workShop.category}" class="card-text"></p>-->
+<!--            <p th:text="${workShop.location}" class="card-text"></p>-->
+<!--            <button type="submit" th:name="action" th:value="in">Add Feed</button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</form>-->
 
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
 
-</body>
-</html>
+<!--<div th:each="workShopFeed:${workShopFeeds}" th:object="workShopFeeds" class="feed">-->
+<!--    <div class="card" style="width: 40rem;">-->
+<!--        <div class="card-body">-->
+<!--            <h5 class="card-title">FEED</h5>-->
+<!--            <h6 th:text="${workShopFeeds.feeds}" class="card-subtitle mb-2 text-muted"></h6>-->
+<!--            <img th:src="${workShopFeeds.image}"  alt="" src="">-->
+<!--            <p th:text="${workShopFeeds.createAt}" class="card-text"></p>-->
+<!--            <a th:href="@{|/shop-edit/${workShopFeeds.id}|}">Update</a>-->
+<!--            <a th:href="@{|/shop-delete/${workShopFeed.id}|}">Delete</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+
+
+<!--</body>-->
+<!--</html>-->
