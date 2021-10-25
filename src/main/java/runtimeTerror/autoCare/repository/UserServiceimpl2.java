@@ -15,9 +15,9 @@ import runtimeTerror.autoCare.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Service
-public class UserServiceImpl implements UserDetailsService {
+public class UserServiceimpl2 implements UserDetailsService {
+
     @Autowired
     UserRepository userRepository;
 
@@ -36,9 +36,9 @@ public class UserServiceImpl implements UserDetailsService {
         List<GrantedAuthority> grantedAuthority= new ArrayList<>();
         grantedAuthority.add(new SimpleGrantedAuthority(user.getRole().getName()));
 
-        Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+//        Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return  new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),grantedAuthority);
+        return  user;
     }
 }
