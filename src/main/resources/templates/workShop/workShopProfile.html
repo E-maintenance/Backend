@@ -23,15 +23,17 @@
             </h2>
         </div>
         <div class="col-sm-5">
-            <div class="card" style="width: 30rem;">
+            <div class="card" style="width: 30rem; margin-top: 20px;">
                 <form th:action="@{/feeds}" method="get">
                     <img src="https://cutewallpaper.org/21/workshop-wallpapers/Free-download-Abandoned-Car-Workshop-by-shadothezombie-.jpg"
                          class="card-img-top" alt="...">
                     <div class="card-body"><br><br>
-                        <h4>UserName :</h4><h5 th:text="${workShop.username}" class="card-title"></h5><br>
-                        <h4>ShopName :</h4><h5 th:text="${workShop.shopName}" class="card-text"></h5><br>
-                        <h4>Category :</h4><h5 th:text="${workShop.category}" class="card-text"></h5><br>
-                        <h4>Location : </h4><h5 th:text="${workShop.location}" class="card-text"></h5><br>
+
+                        <h4>UserName : <span th:text="${workShop.username}" class="card-title"></span></h4><br>
+
+                        <h4>ShopName : <span th:text="${workShop.shopName}" class="card-text"></span></h4><br>
+                        <h4>Category : <span th:text="${workShop.category}" class="card-text"></span></h4><br>
+                        <h4>Location : <span th:text="${workShop.location}" class="card-text"></span></h4><br>
                         <button type="submit" th:name="action" th:value="in" class="btn btn-success"> ADD Your
                             Feed
                         </button>
@@ -58,15 +60,14 @@
             <!--            </div>-->
         </div>
 
-
         <div class="col-sm-6">
-            <div th:each="workShopFeed:${workShopFeeds}" class="feed">
-                <div class="card" style="width: 40rem;">
+            <div th:each="workShopFeed:${workShopFeeds}" class="feed" >
+                <div class="card" style="width: 40rem; margin-top: 20px;">
                     <div class="card-body">
                         <h5 class="card-title">FEED</h5>
                         <h6 th:text="${workShopFeed.feeds}" class="card-subtitle mb-2 text-muted"></h6>
                         <img th:src="${workShopFeed.image}" alt="" src="">
-                        <p th:text="${workShopFeed.createAt}" class="card-text"></p>
+                        <p th:text="${workShopFeed.timeNow}" class="card-text"></p>
                         <a th:href="@{|/shop-edit/${workShopFeed.id}|}">Update</a>
                         <a th:href="@{|/shop-delete/${workShopFeed.id}|}">Delete</a>
                     </div>

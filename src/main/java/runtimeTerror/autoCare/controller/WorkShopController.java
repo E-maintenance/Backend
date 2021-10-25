@@ -16,6 +16,7 @@ import runtimeTerror.autoCare.repository.WorkShopRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -64,7 +65,6 @@ public class WorkShopController {
         WorkShop workShop = workShopRepository.findWorkShopByUsername(userDetails.getUsername());
         List<WorkShopFeeds> workShopFeeds = workShopFeedsRepository.findAllByWorkShop_Id(workShop.getId()).orElseThrow();
         model.addAttribute("workShop", workShop);
-//        model.addAttribute("workShopFeeds", workShop.getFeeds());
         model.addAttribute("workShopFeeds", workShopFeeds);
         return "workShop/workShopProfile";
     }
@@ -110,7 +110,7 @@ public class WorkShopController {
         WorkShopFeeds oldWorkShopFeeds = workShopFeedsRepository.findWorkShopFeedsById(id).orElseThrow();
         oldWorkShopFeeds.setFeeds(workShopFeeds.getFeeds());
         oldWorkShopFeeds.setImage(workShopFeeds.getImage());
-
+        oldWorkShopFeeds.setTimeNow(new Date().getTime());
         workShopFeedsRepository.save(oldWorkShopFeeds);
         return "redirect:/workShopProfile";
     }
