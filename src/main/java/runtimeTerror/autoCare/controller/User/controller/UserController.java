@@ -94,10 +94,7 @@ public class UserController {
        }
     }
 
-    @GetMapping("/")
-    public String index() {
-        return "home";
-    }
+
 
     @GetMapping("/User/register/verification/{token}")
     public String verificationEmail(Model m, @PathVariable String token){
