@@ -24,8 +24,6 @@ public class WorkShop {
     private List<WorkShopFeeds> feeds;
 
 
-
-
     public WorkShop() {
     }
 

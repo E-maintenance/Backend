@@ -1,14 +1,14 @@
 package runtimeTerror.autoCare.model.blog;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import runtimeTerror.autoCare.model.User;
+import runtimeTerror.autoCare.model.WorkShop;
+
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-public class Post {
+public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +18,30 @@ public class Post {
 
     private Timestamp createdAt;
 
-    public Post(String body, Timestamp createdAt) {
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
+    public Review() {
+    }
+
+    public Review(String body, Timestamp createdAt, User user) {
         this.body = body;
         this.createdAt = createdAt;
+        this.user = user;
+    }
+
+    public Review(String body, Timestamp createdAt) {
+        this.body = body;
+        this.createdAt = createdAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getBody() {
