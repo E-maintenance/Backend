@@ -52,6 +52,7 @@ public class WorkShopController {
 
     @PostMapping ("/shop-login")
     public String LoginPage(@RequestParam String username) {
+
         WorkShop workShop = workShopRepository.findWorkShopByUsername(username);
         Authentication authentication = new UsernamePasswordAuthenticationToken(workShop, null, new ArrayList<>());
         SecurityContextHolder.getContext().setAuthentication(authentication);
