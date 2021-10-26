@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,6 +7,7 @@
             rel="stylesheet"
             href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Maps Project</title>
     <style>
         #map {
@@ -21,15 +22,16 @@
     </style>
 </head>
 <body>
+<input type="hidden" id="jsonBom" th:value='${Shops}'/>
 <p>Click the button to get your coordinates.</p>
 
 <button onclick="getLocation()">Try It</button>
 
 <p id="demo"></p>
 <div id="map"></div>
-
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-<script>
+<script type="text/javascript">
+
 
     function getLocation() {
         if (navigator.geolocation) {
@@ -79,49 +81,79 @@
                 .addTo(mymap)
                 .bindPopup('I am a circle');
 
-            var loc = [[${Shops}]];
-            console.log(loc)
 
-            let locations = [
-                {
-                    lat: '31.979056',
-                    lon: '35.954154',
-                },
-                {
-                    lat: '31.976681',
-                    lon: ' 35.957823',
-                },
-                {
-                    lat: '31.973423',
-                    lon: '35.951407',
-                },
-                { lat: '31.972094', lon: '35.954905' },
-            ];
-            locations.map((e) => {
-                const marker1 = L.marker([e.lat, e.lon]).addTo(mymap);
-                marker._icon.classList.add('huechange');
-                // Add popup message
-                let template = `
-    <h3 >Empire State Building</h3>
-    <div style="text-align:center">
-        <img width="150" height="150"src="image.jpg"/>
-    </div>
-    `;
-                marker1.bindPopup(template);
-                const circle = L.circle([e.lat, e.lon], {
-                    radius: 20,
-                    color: 'green',
-                    fillColor: 'red',
-                    fillOpacity: 0.2,
-                })
-                    .addTo(mymap)
-                    .bindPopup('I am a circle');
-            });
-        }
+            var jsonBom = $('#jsonBom').val().replace("[","").replace("]","").split(", ");
+            console.log(jsonBom);
+
+
+
+            jsonBom.forEach(e =>{
+                var newA= JSON.parse(e);
+                            const marker1 = L.marker([newA.lat, newA.lon]).addTo(mymap);
+                            marker._icon.classList.add('huechange');
+                            // Add popup message
+                            let template = `
+                <h3 >${newA.shopName}</h3>
+<!--                <a th:href=""> </a>-->
+                `;
+                            marker1.bindPopup(template);
+                            const circle = L.circle([newA.lat, newA.lon], {
+                                radius: 20,
+                                color: 'green',
+                                fillColor: 'red',
+                                fillOpacity: 0.2,
+                            })
+                                .addTo(mymap)
+                                .bindPopup('I am a circle');
+                        });
+                    }
+
+
+           // var w=[[${Shops}]]+"";
+           //     console.log(w);
+
+
+    //         let locations = [
+    //             {
+    //                 lat: '31.979056',
+    //                 lon: '35.954154',
+    //             },
+    //             {
+    //                 lat: '31.976681',
+    //                 lon: ' 35.957823',
+    //             },
+    //             {
+    //                 lat: '31.973423',
+    //                 lon: '35.951407',
+    //             },
+    //             { lat: '31.972094', lon: '35.954905' },
+    //         ];
+    //         locations.map((e) => {
+    //             const marker1 = L.marker([e.lat, e.lon]).addTo(mymap);
+    //             marker._icon.classList.add('huechange');
+    //             // Add popup message
+    //             let template = `
+    // <h3 >Empire State Building</h3>
+    // <div style="text-align:center">
+    //     <img width="150" height="150"src="image.jpg"/>
+    // </div>
+    // `;
+    //             marker1.bindPopup(template);
+    //             const circle = L.circle([e.lat, e.lon], {
+    //                 radius: 20,
+    //                 color: 'green',
+    //                 fillColor: 'red',
+    //                 fillOpacity: 0.2,
+    //             })
+    //                 .addTo(mymap)
+    //                 .bindPopup('I am a circle');
+    //         });
+    //     }
     }
 
 
 </script>
+
 
 </body>
 </html>

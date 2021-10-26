@@ -20,15 +20,6 @@ public class Location {
         return workShop;
     }
 
-    @Override
-    public String toString() {
-        return "Location{" +
-                "id=" + id +
-                ", lat='" + lat + '\'' +
-                ", lon='" + lon + '\'' +
-//                ", workShop=" + workShop +
-                '}';
-    }
 
     public void setWorkShop(WorkShop workShop) {
         this.workShop = workShop;
@@ -64,5 +55,12 @@ public class Location {
 
     public void setLon(String lon) {
         this.lon = lon;
+    }
+
+    @Override
+    public String toString() {
+        return
+                "\"," +"\"lat\""+":\""+ lat +
+                "\"," +"\"lon\""+":\""+ lon  ;
     }
 }

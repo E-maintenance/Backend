@@ -28,7 +28,7 @@ public class WorkShop implements UserDetails {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id")
-   private Location location ;
+    private Location location ;
 
     public Location getLocation() {
         return location;
@@ -38,18 +38,7 @@ public class WorkShop implements UserDetails {
         this.location = location;
     }
 
-    @Override
-    public String toString() {
-        return "WorkShop{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", shopName='" + shopName + '\'' +
-                ", category='" + category + '\'' +
-                ", location=" + location +
-                ", feeds=" + feeds +
-                '}';
-    }
+
 
 
 
@@ -144,6 +133,13 @@ public class WorkShop implements UserDetails {
         this.category = category;
     }
 
+    @Override
+    public String toString() {
+        return
+                 "{"+"\"id\""+":\""+ id +
+                "\"," +"\"username\""+":\""+ username + "\"," +"\"shopName\""+":\""+ shopName +  location.toString()+"\"}"
+                ;
+    }
 
 
     public Long getId() {
