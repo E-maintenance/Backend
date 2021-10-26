@@ -15,6 +15,7 @@ import runtimeTerror.autoCare.repository.RoleRepository;
 import runtimeTerror.autoCare.repository.UserRepository;
 import runtimeTerror.autoCare.repository.VerifiedRepository;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -44,12 +45,12 @@ public class AdminController  {
     }
 
     @PostMapping ("/admin/register")
-    public String RegisterAdmin(@Valid @ModelAttribute User user, BindingResult result, Model model,HttpServletRequest request){
+    public String RegisterAdmin(@Valid @ModelAttribute User user, BindingResult result, Model model,HttpServletRequest request) throws MessagingException {
         model.addAttribute("userRegistrationDto", user);
         User userExists = userRepository.findUserByUsername(user.getUsername());
         System.out.println(userExists);
         Role role= roleRepository.findByName("ADMIN");
-        if (userExists != null) {
+        if (userExists != null && (userExists.getRole().equals("1"))) {
             return "redirect:/admin/register?username";
         }
         if(result.hasErrors()){
@@ -60,12 +61,13 @@ public class AdminController  {
         role.setUser(user);
         userRepository.save(user);
         Verification verified = new Verification(user.getEmail());
-        service.sendSimpleEmail(user.getEmail(),request.getRequestURL().toString()+"/verification/"+verified.getToken(),"please verified Email");
-        verifiedRepository.save(verified);
+       String fun = service.buildEmail(user.getFullname(),request.getRequestURL().toString()+"/verification/"+verified.getToken());
+        service.send(user.getEmail(),fun);
+       verifiedRepository.save(verified);
         roleRepository.save(role);
         return "redirect:/admin/register?success";
     }
-    
+
     @GetMapping("/admin/login")
     public String loginAdmin(){
         return "admin/auth/login";

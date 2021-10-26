@@ -33,11 +33,17 @@ public class WorkShopFeeds {
     public WorkShopFeeds() {
     }
 
+
     public WorkShopFeeds(String feeds, String image, LocalDateTime createAt, WorkShop workShop) {
         this.feeds = feeds;
         this.image = image;
         this.createAt = createAt;
         this.workShop = workShop;
+    }
+
+    public WorkShopFeeds(String feeds, String image) {
+        this.feeds = feeds;
+        this.image = image;
     }
 
     public String getFeeds() {
@@ -79,4 +85,5 @@ public class WorkShopFeeds {
     public void setId(Long id) {
         this.id = id;
     }
+
 }
