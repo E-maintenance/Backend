@@ -16,7 +16,7 @@ public class WorkshopReview {
 
     private Timestamp createdAt;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 

@@ -30,12 +30,12 @@ public class User implements UserDetails {
     private  String phone;
     private String password;
 
-    @OneToOne(mappedBy = "user")
-    private Review review;
+    @OneToMany (mappedBy = "user")
+    private List <Review> reviews;
 
 
     @OneToMany(mappedBy = "user")
-    private Set <WorkshopReview> workshopReview;
+    private List <WorkshopReview> workshopReview;
 
 
     public User() {
@@ -60,11 +60,10 @@ public class User implements UserDetails {
     }
 
 
-    public User(String fullname, String username, String email, Review review ) {
+    public User(String fullname, String username, String email ) {
         this.fullname = fullname;
         this.username = username;
         this.email = email;
-        this.review = review;
     }
 
     public String getFullname() {
@@ -77,20 +76,20 @@ public class User implements UserDetails {
 
 
 
-    public Review getReview() {
-        return review;
+    public List <Review> getReview() {
+        return reviews;
     }
 
-    public void setReview(Review review) {
-        this.review = review;
+    public void setReview(List <Review> reviews) {
+        this.reviews = reviews;
     }
 
 
-    public Set <WorkshopReview> getWorkshopReview() {
+    public List <WorkshopReview> getWorkshopReview() {
         return  workshopReview;
     }
 
-    public void setWorkshopReview(Set <WorkshopReview> workshopReview) {
+    public void setWorkshopReview(List <WorkshopReview> workshopReview) {
         this.workshopReview =  workshopReview;
     }
 

@@ -18,16 +18,18 @@
 <main>
     <p class="lead">All Reviews </p>
     <form >
-        <a th:href="@{/addReview}" class="btn btn-primary" style="background-color:#3D0000; margin-left:47.5%;border: #F9F3DF;">Add Post</a >
+        <a th:href="@{/addReview}" class="btn btn-primary" style="background-color:#3D0000; margin-left:47.5%;border: #F9F3DF;">Add Review</a >
     </form>
-    <div th:each="review : ${user.review}" style="border-style: solid;border-radius: 15px;border-width: medium; width:50%;text-align:center;margin-left:47%;margin-bottom:2%;">
+    <div th:each="review : ${reviews}" style="border-style: solid;border-radius: 15px;border-width: medium; width:50%;text-align:center;margin-left:47%;margin-bottom:2%;">
             <div >
                 <p ><span th:text="${review.body}"></span></p>
                 <p >Created at: <span th:text="${review.createdAt}"></span></p>
-                <a th:href="@{|/deleteReview/${review.id}|}">Delete</a>
 
-                <p>Rate us </p>
-<!--                <div class="rating">-->
+                <div sec:authorize="hasAnyRole('ADMIN')">
+                    <a th:href="@{|/deleteReview/${review.id}|}">Delete</a>
+                </div>
+
+                <!--                <div class="rating">-->
 
 <!--                    <input type="radio" name="rating" id="r1">-->
 <!--                    <label for="r1"></label>-->

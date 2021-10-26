@@ -94,7 +94,6 @@ public class WorkShopController {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         WorkShop workShop = workShopRepository.findWorkShopByUsername(userDetails.getUsername());
         feeds.setWorkShop(workShop);
-
         workShopFeedsRepository.save(feeds);
         workShopRepository.save(workShop);
         workShop.setFeeds(Collections.singletonList(feeds));
