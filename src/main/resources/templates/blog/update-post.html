@@ -8,12 +8,12 @@
 >
 <head>
     <meta charset="UTF-8">
-    <title>Update post</title>
+    <title>Update review</title>
 </head>
 <body>
 <main>
     <form method="POST"  th:action="@{/blog/update/{id}}"
-          th:object="${post}" >
+          th:object="${review}" >
 
         <label  for="body">
             <p class="display-4" style="padding: 50px;">Update your Post</p>

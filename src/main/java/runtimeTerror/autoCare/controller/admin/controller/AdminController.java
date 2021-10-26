@@ -50,7 +50,7 @@ public class AdminController  {
         User userExists = userRepository.findUserByUsername(user.getUsername());
         System.out.println(userExists);
         Role role= roleRepository.findByName("ADMIN");
-        if (userExists != null) {
+        if (userExists != null && (userExists.getRole().equals("1"))) {
             return "redirect:/admin/register?username";
         }
         if(result.hasErrors()){
