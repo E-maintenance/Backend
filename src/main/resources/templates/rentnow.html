@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css?family=DM+Sans:300,400,700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="fonts/icomoon/style.css">
-  <script src="signature_pad.js"></script>
+  <script src="static/signature_pad.js"></script>
   <link rel="stylesheet" href="rentcss/bootstrap.min.css">
   <link rel="stylesheet" href="rentcss/bootstrap-datepicker.css">
   <link rel="stylesheet" href="rentcss/jquery.fancybox.min.css">
@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="rentcss/owl.theme.default.min.css">
   <link rel="stylesheet" href="rentcss/flaticon/font/flaticon.css">
   <link rel="stylesheet" href="rentcss/aos.css">
+
 
   <!-- MAIN CSS -->
   <link rel="stylesheet" href="css/style.css">
@@ -163,16 +164,19 @@
                   </label> <input type="text"  class="form-control"> </div>
                 </div>
               </div>
+
               <div class="card-footer">
                 <input type="submit" class="subscribe btn btn-primary btn-block shadow-sm" value="Confirm Payment" >
               </div>
-            </div>
-              <div id="signature-pad" class="m-signature-pad">
-                <div class="m-signature-pad--body">
-                  <canvas></canvas>
-                  <input type="hidden" name="signature" id="signature" value="">
+                <div class="tools">
+                  <a href="#colors_sketch" data-tool="marker">Marker</a> <a href="#colors_sketch" data-tool="eraser">
+                  Eraser</a>
                 </div>
+                <br />
+                <canvas id="colors_sketch" width="500" height="200" style="border: 1px solid #ccc">
+                </canvas>
               </div>
+            </div>
           </form>
 
 
@@ -191,31 +195,58 @@
 <!--    <input type="text" id="cardnumber" name="cardnumber" ><br><br>-->
 <!--    <input type="submit" value="Submit">-->
 <!--  </form>-->
-</div>
-  <form  th:href="@{/detales}">
+
+  <form  th:href="@{/detales}" >
 
     <div th:each="post : ${username}" style="border-style: solid;border-radius: 15px;border-width: medium; width:50%;text-align:center;margin-left:47%;margin-bottom:2%;">
-      <div >
-        <div >
-
-          <p ><span th:text="${post.name}"></span></p>
-          <p ><span th:text="${post.cardnumber}"></span></p>
-          <p ><span th:text="${post.date}"></span></p>
-          <p ><span th:text="${post.firstname}"></span></p>
-          <p ><span th:text="${post.secondename}"></span></p>
-          <p ><span th:text="${post.email}"></span></p>
-          <p ><span th:text="${post.phonnumber}"></span></p>
-          <p ><span th:text="${post.address}"></span></p>
-          <p ><span th:text="${post.nationalityID}"></span></p>
-          <p ><span th:text="${post.DOB}"></span></p>
-
-          <td><a th:href="@{/delete/{id}(id=${post.id})}">Delete</a></td>-->
 
 
 
-        </div>
-      </div>
-    </div>
+      <div class="card" style="width: 18rem;">
+        <ul class="list-group list-group-flush">
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+
+            <li class="list-group-item" th:text="${post.firstname}" >First Name</li>
+          <li class="list-group-item" th:text="${post.secondename}" >Second Name</li>
+          <li class="list-group-item" th:text="${post.email}" >Email</li>
+          <li class="list-group-item" th:text="${post.phonnumber}" >Phone Number</li>
+          <li class="list-group-item" th:text="${post.address}" >Address</li>
+          <li class="list-group-item" th:text="${post.nationalityID}" >Nationality ID</li>
+          <li class="list-group-item" th:text="${post.DOB}" >Day Of pareth</li>
+          <li class="list-group-item"  >Payment details : </li>
+          <li class="list-group-item" th:text="${post.name}" >name</li>
+          <li class="list-group-item" th:text="${post.cardnumber}" >Card Number</li>
+          <li class="list-group-item" th:text="${post.date}" >Expire Date : </li>
+            </ul>
+
+          </div>
+
+
+
+
+
+
+<!--          <a  th:href="@{/delete/{id}(id=${post.id})}" class="btn btn-primary">Delete</a>         -->
+<!--       -->
+<!--        </ul>-->
+<!--      </div>-->
+
+<!--          <p ><span th:text="${post.name}"></span></p>-->
+<!--          <p ><span th:text="${post.cardnumber}"></span></p>-->
+<!--          <p ><span th:text="${post.date}"></span></p>-->
+<!--          <p ><span th:text="${post.firstname}"></span></p>-->
+<!--          <p ><span th:text="${post.secondename}"></span></p>-->
+<!--          <p ><span th:text="${post.email}"></span></p>-->
+<!--          <p ><span th:text="${post.phonnumber}"></span></p>-->
+<!--          <p ><span th:text="${post.address}"></span></p>-->
+<!--          <p ><span th:text="${post.nationalityID}"></span></p>-->
+<!--          <p ><span th:text="${post.DOB}"></span></p>-->
+
+<!--          <td><a th:href="@{/delete/{id}(id=${post.id})}">Delete</a></td>&ndash;&gt;-->
+
+
+
   </form>
 
 
@@ -236,6 +267,7 @@
 
 <!--    </div>-->
 <!--  </div>-->
+
 
 </div>
 </div>

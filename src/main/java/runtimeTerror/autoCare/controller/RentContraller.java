@@ -23,7 +23,7 @@ public class RentContraller {
     @Autowired
     RentRepository rentrepo;
 
-    @GetMapping("/card/{id}")
+    @GetMapping("/card")
     public String paymentCard(Principal principal , Model model) {
         model.addAttribute("user", rentrepo.findAll());
         return "rentnow";
@@ -53,6 +53,12 @@ public class RentContraller {
         rentrepo.deleteById(id);
         return "redirect:/detales";
     }
-
-
+    @GetMapping("/contract")
+    public String paymentCard21(Principal principal , Model model) {
+        return "redirect:/rentnow";
+    }
+    @GetMapping("/ww")
+    public String paymentCard212(Principal principal , Model model) {
+        return "contract";
+    }
 }
