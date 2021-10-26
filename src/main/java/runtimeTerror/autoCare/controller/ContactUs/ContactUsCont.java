@@ -10,6 +10,7 @@ import runtimeTerror.autoCare.model.ContactUs.HelloMessage;
 import runtimeTerror.autoCare.repository.ContactUs.ContactUsRep;
 import runtimeTerror.autoCare.repository.ContactUs.HelloMessageRepository;
 
+import javax.websocket.server.ServerEndpoint;
 import java.net.URISyntaxException;
 
 @Controller
@@ -18,8 +19,7 @@ public class ContactUsCont {
     ContactUsRep ContactUs;
     @Autowired
     HelloMessageRepository helloMessageRepository;
-
-    @MessageMapping("/hello")
+    @MessageMapping("/chat")
     @SendTo("/topic/contacts")
     public ContactUsModel contact(HelloMessage message) throws InterruptedException, URISyntaxException {
 
