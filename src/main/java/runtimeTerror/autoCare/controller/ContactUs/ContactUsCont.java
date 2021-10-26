@@ -14,7 +14,6 @@ import java.net.URISyntaxException;
 
 @Controller
 public class ContactUsCont {
-
     @Autowired
     ContactUsRep ContactUs;
     @Autowired
