@@ -10,7 +10,6 @@ import runtimeTerror.autoCare.model.ContactUs.HelloMessage;
 import runtimeTerror.autoCare.repository.ContactUs.ContactUsRep;
 import runtimeTerror.autoCare.repository.ContactUs.HelloMessageRepository;
 
-import javax.websocket.server.ServerEndpoint;
 import java.net.URISyntaxException;
 
 @Controller
@@ -26,7 +25,7 @@ public class ContactUsCont {
         helloMessageRepository.save(message);
         Thread.sleep(1000); // simulated delay
 
-        ContactUsModel greeting = new ContactUsModel("Who can we help you, " + HtmlUtils.htmlEscape(message.getName())+"?");
+        ContactUsModel greeting = new ContactUsModel(HtmlUtils.htmlEscape(message.getName()));
         System.out.println(HtmlUtils.htmlEscape(message.getName()));
         ContactUs.save(greeting);
         return greeting;
