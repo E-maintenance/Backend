@@ -8,6 +8,7 @@ import runtimeTerror.autoCare.model.WorkShop;
 @Repository
 public interface WorkShopRepository extends JpaRepository<WorkShop, Long> {
     WorkShop findWorkShopByUsername(String username);
+    WorkShop findWorkShopById(Long id);
 
 
 }

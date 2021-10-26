@@ -21,29 +21,30 @@
         <a th:href="@{/addReview}" class="btn btn-primary" style="background-color:#3D0000; margin-left:47.5%;border: #F9F3DF;">Add Post</a >
     </form>
     <div th:each="review : ${user.review}" style="border-style: solid;border-radius: 15px;border-width: medium; width:50%;text-align:center;margin-left:47%;margin-bottom:2%;">
-        <div >
             <div >
                 <p ><span th:text="${review.body}"></span></p>
                 <p >Created at: <span th:text="${review.createdAt}"></span></p>
+                <a th:href="@{|/deleteReview/${review.id}|}">Delete</a>
+
                 <p>Rate us </p>
-                <div class="rating">
+<!--                <div class="rating">-->
 
-                    <input type="radio" name="rating" id="r1">
-                    <label for="r1"></label>
+<!--                    <input type="radio" name="rating" id="r1">-->
+<!--                    <label for="r1"></label>-->
 
-                    <input type="radio" name="rating" id="r2">
-                    <label for="r2"></label>
+<!--                    <input type="radio" name="rating" id="r2">-->
+<!--                    <label for="r2"></label>-->
 
-                    <input type="radio" name="rating" id="r3">
-                    <label for="r3"></label>
+<!--                    <input type="radio" name="rating" id="r3">-->
+<!--                    <label for="r3"></label>-->
 
-                    <input type="radio" name="rating" id="r4">
-                    <label for="r4"></label>
+<!--                    <input type="radio" name="rating" id="r4">-->
+<!--                    <label for="r4"></label>-->
 
-                    <input type="radio" name="rating" id="r5">
-                    <label for="r5"></label>
+<!--                    <input type="radio" name="rating" id="r5">-->
+<!--                    <label for="r5"></label>-->
 
-                </div>
+<!--                </div>-->
 <!--                <form >-->
 <!--                    <a th:href="'/blog/edit/' + ${id}" class="btn btn-primary" style="background-color:#3D0000; margin-left:47.5%;border: #F9F3DF;">Edit</a >-->
 <!--                </form>-->
@@ -51,7 +52,6 @@
 <!--                    <a th:href="'/blog/delete/' + ${id}" class="btn btn-primary" style="background-color:#3D0000; margin-left:47.5%;border: #F9F3DF;">Delete</a >-->
 <!--                </form>-->
             </div>
-        </div>
 
     </div>
 

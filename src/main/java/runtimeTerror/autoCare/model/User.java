@@ -5,11 +5,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import runtimeTerror.autoCare.dto.UserRegistrationDto;
 import runtimeTerror.autoCare.model.blog.Review;
+import runtimeTerror.autoCare.model.blog.WorkshopReview;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -30,6 +32,11 @@ public class User implements UserDetails {
 
     @OneToOne(mappedBy = "user")
     private Review review;
+
+
+    @OneToMany(mappedBy = "user")
+    private Set <WorkshopReview> workshopReview;
+
 
     public User() {
     }
@@ -53,7 +60,7 @@ public class User implements UserDetails {
     }
 
 
-    public User(String fullname, String username, String email, Review review) {
+    public User(String fullname, String username, String email, Review review ) {
         this.fullname = fullname;
         this.username = username;
         this.email = email;
@@ -78,6 +85,14 @@ public class User implements UserDetails {
         this.review = review;
     }
 
+
+    public Set <WorkshopReview> getWorkshopReview() {
+        return  workshopReview;
+    }
+
+    public void setWorkshopReview(Set <WorkshopReview> workshopReview) {
+        this.workshopReview =  workshopReview;
+    }
 
     public boolean isVerified() {
         return isVerified;

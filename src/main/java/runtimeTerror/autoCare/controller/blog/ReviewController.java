@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 import runtimeTerror.autoCare.model.User;
+import runtimeTerror.autoCare.model.WorkShopFeeds;
 import runtimeTerror.autoCare.model.blog.Review;
 import runtimeTerror.autoCare.repository.UserRepository;
 import runtimeTerror.autoCare.repository.blog.ReviewRepository;
@@ -57,6 +58,15 @@ public class ReviewController {
         model.addAttribute("user",user);
 
         return "/blog/addReview";
+    }
+
+
+    @GetMapping("/deleteReview/{id}")
+    public String deleteReview(@PathVariable("id") Long id, Model model){
+        Review review = reviewRepository.findReviewById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid review Id:" + id));
+        reviewRepository.deleteById(id);
+        return "redirect:/reviews";
     }
 
 //    @GetMapping("/blog/edit/{id}")
