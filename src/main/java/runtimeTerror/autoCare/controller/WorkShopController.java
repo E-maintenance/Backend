@@ -11,6 +11,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import runtimeTerror.autoCare.model.WorkShop;
 import runtimeTerror.autoCare.model.WorkShopFeeds;
+import runtimeTerror.autoCare.model.Location;
+import runtimeTerror.autoCare.repository.LocationRepository;
 import runtimeTerror.autoCare.repository.WorkShopFeedsRepository;
 import runtimeTerror.autoCare.repository.WorkShopRepository;
 
@@ -30,7 +32,8 @@ public class WorkShopController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-
+@Autowired
+    LocationRepository locationRepository;
 
     @GetMapping("/shop-signup")
     public String signUp() {
@@ -38,9 +41,18 @@ public class WorkShopController {
     }
 
     @PostMapping("/shop-signup")
-    public String attemptSignUp(WorkShop workShop) {
+    public String attemptSignUp(@ModelAttribute WorkShop workShop ,@ModelAttribute Location loc) {
+        System.out.println("--------------------------------------------------------------");
+        System.out.println(workShop);
+        System.out.println(loc);
+        locationRepository.save(loc);
         workShop.setPassword(passwordEncoder.encode(workShop.getPassword()));
+        workShop.setLocation(loc);
+        loc.setWorkShop(workShop);
+
+
         workShopRepository.save(workShop);
+
         return ("redirect:/shop-signup#");
     }
 
@@ -122,5 +134,7 @@ public class WorkShopController {
         workShopFeedsRepository.deleteById(id);
         return "redirect:/workShopProfile";
     }
+
+
 
 }
