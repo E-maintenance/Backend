@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+>
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -34,7 +35,7 @@
                 You have been logged out.
             </div>
         </div>
-        <form th:action="@{/admin/login}" method="post">
+        <form th:action="@{/admin/login}" method="review">
             <div class="form-group has-feedback">
                 <input type="text" class="form-control" name="username" required placeholder="text">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

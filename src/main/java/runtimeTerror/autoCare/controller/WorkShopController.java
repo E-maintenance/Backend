@@ -1,5 +1,4 @@
 package runtimeTerror.autoCare.controller;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,6 +11,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import runtimeTerror.autoCare.model.WorkShop;
 import runtimeTerror.autoCare.model.WorkShopFeeds;
+import runtimeTerror.autoCare.model.Location;
+import runtimeTerror.autoCare.repository.LocationRepository;
 import runtimeTerror.autoCare.repository.WorkShopFeedsRepository;
 import runtimeTerror.autoCare.repository.WorkShopRepository;
 
@@ -31,7 +32,8 @@ public class WorkShopController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-
+@Autowired
+    LocationRepository locationRepository;
 
     @GetMapping("/shop-signup")
     public String signUp() {
@@ -39,9 +41,18 @@ public class WorkShopController {
     }
 
     @PostMapping("/shop-signup")
-    public String attemptSignUp(WorkShop workShop) {
+    public String attemptSignUp(@ModelAttribute WorkShop workShop ,@ModelAttribute Location loc) {
+        System.out.println("--------------------------------------------------------------");
+        System.out.println(workShop);
+        System.out.println(loc);
+        locationRepository.save(loc);
         workShop.setPassword(passwordEncoder.encode(workShop.getPassword()));
+        workShop.setLocation(loc);
+        loc.setWorkShop(workShop);
+
+
         workShopRepository.save(workShop);
+
         return ("redirect:/shop-signup#");
     }
 
@@ -97,8 +108,8 @@ public class WorkShopController {
 
         WorkShopFeeds workShopFeeds = workShopFeedsRepository.findWorkShopFeedsById(id).orElseThrow();
         System.out.println(workShopFeeds.getId());
-        model.addAttribute("workshop", workShopFeeds );
-        return "/workShop/updateFeed";
+        model.addAttribute("workShopFeeds", workShopFeeds );
+        return "workShop/updateFeed";
     }
 
     @PostMapping("/shop-update/{id}")
@@ -108,7 +119,11 @@ public class WorkShopController {
             workShopFeeds.setId(id);
             return "workShop/feeds";
         }
-        workShopFeedsRepository.save(workShopFeeds);
+        WorkShopFeeds oldWorkShopFeeds = workShopFeedsRepository.findWorkShopFeedsById(id).orElseThrow();
+        oldWorkShopFeeds.setFeeds(workShopFeeds.getFeeds());
+        oldWorkShopFeeds.setImage(workShopFeeds.getImage());
+
+        workShopFeedsRepository.save(oldWorkShopFeeds);
         return "redirect:/workShopProfile";
     }
 
@@ -116,8 +131,10 @@ public class WorkShopController {
     public String deleteFeed(@PathVariable("id") Long id, Model model){
         WorkShopFeeds workShopFeeds = workShopFeedsRepository.findWorkShopFeedsById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Feed Id:" + id));
-        workShopFeedsRepository.deleteWorkShopFeedsById(id).orElseThrow();
+        workShopFeedsRepository.deleteById(id);
         return "redirect:/workShopProfile";
     }
+
+
 
 }

@@ -1,11 +1,14 @@
 package runtimeTerror.autoCare.model;
 
+import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class WorkShop implements UserDetails {
@@ -21,12 +24,37 @@ public class WorkShop implements UserDetails {
     String password;
     String shopName;
     String category;
-    String location;
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "location_id")
+   private Location location ;
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    @Override
+    public String toString() {
+        return "WorkShop{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", shopName='" + shopName + '\'' +
+                ", category='" + category + '\'' +
+                ", location=" + location +
+                ", feeds=" + feeds +
+                '}';
+    }
+
+
 
     @OneToMany(mappedBy = "feeds")
     private List<WorkShopFeeds> feeds;
-
-
 
 
     public WorkShop() {
@@ -37,12 +65,12 @@ public class WorkShop implements UserDetails {
         this.password = password;
     }
 
-    public WorkShop(String username, String password, String shopName, String category, String location) {
+    public WorkShop(String username, String password, String shopName, String category) {
         this.username = username;
         this.password = password;
         this.shopName = shopName;
         this.category = category;
-        this.location = location;
+
     }
 
 
@@ -116,13 +144,7 @@ public class WorkShop implements UserDetails {
         this.category = category;
     }
 
-    public String getLocation() {
-        return location;
-    }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
 
     public Long getId() {
         return id;

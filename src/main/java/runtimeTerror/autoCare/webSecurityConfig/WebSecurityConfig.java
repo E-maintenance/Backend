@@ -3,6 +3,9 @@ package runtimeTerror.autoCare.webSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -11,9 +14,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import runtimeTerror.autoCare.repository.UserServiceImpl;
 
+import java.util.Properties;
+
 
 @Configuration
 @EnableWebSecurity
+@Order(1)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
@@ -40,10 +46,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().disable()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers().permitAll()
-                .antMatchers("/admin/register").permitAll()
-                .antMatchers("/admin/login").permitAll()
-                .anyRequest().permitAll()
+                .antMatchers("/admin**").permitAll()
+                .antMatchers("/admin/dashboard").hasAuthority("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/admin/login")
@@ -52,5 +56,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutSuccessUrl("/admin/login");
     }
-
 }
