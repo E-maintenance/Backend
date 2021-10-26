@@ -7,56 +7,62 @@
         crossorigin="anonymous"
 >
 <link rel="stylesheet" href="/reviewCss/review.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" />
+
 <head>
     <meta charset="UTF-8">
     <title>Blog</title>
 </head>
 <body>
 
-<header>Reviews</header>
-
 <main>
-    <p class="lead">All Reviews </p>
-    <form >
-        <a th:href="@{/addReview}" class="btn btn-primary" style="background-color:#3D0000; margin-left:47.5%;border: #F9F3DF;">Add Review</a >
-    </form>
-    <div th:each="review : ${reviews}" style="border-style: solid;border-radius: 15px;border-width: medium; width:50%;text-align:center;margin-left:47%;margin-bottom:2%;">
-            <div >
-                <p ><span th:text="${review.body}"></span></p>
-                <p >Created at: <span th:text="${review.createdAt}"></span></p>
+<!--    <p class="lead">All Reviews </p>-->
+<!--    <form >-->
+<!--        <a th:href="@{/addReview}" class="btn btn-primary" style="background-color:#3D0000; margin-left:47.5%;border: #F9F3DF;">Add Review</a >-->
+<!--    </form>-->
+<!--    <div th:each="review : ${reviews}" style="border-style: solid;border-radius: 15px;border-width: medium; width:50%;text-align:center;margin-left:47%;margin-bottom:2%;">-->
+<!--            <div >-->
+<!--                <p ><span th:text="${review.body}"></span></p>-->
+<!--                <p >Created at: <span th:text="${review.createdAt}"></span></p>-->
 
-                <div sec:authorize="hasAnyRole('ADMIN')">
+<!--                <div sec:authorize="hasAnyRole('ADMIN')">-->
+<!--                    <a th:href="@{|/deleteReview/${review.id}|}">Delete</a>-->
+<!--                </div>-->
+<!--                -->
+<!--            </div>-->
+
+<!--    </div>-->
+
+    <div class="review-container">
+        <h2>Reviews</h2>
+        <div class="cards" th:each="review : ${reviews}" th:object="${user}">
+            <div class="card">
+                <div class="card-top">
+                    <div class="name">
+                        <i class="far fa-user" style="font-size:35px"  ></i>
+                        <p th:text="${review.user.username}" ></p>
+                    </div>
+                    <div class="rate">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <p th:text="${review.body}" style="font-size:17px"></p>
+                </div>
+
+                <div sec:authorize="hasAnyRole('ROLE_ADMIN')">
                     <a th:href="@{|/deleteReview/${review.id}|}">Delete</a>
                 </div>
 
-                <!--                <div class="rating">-->
-
-<!--                    <input type="radio" name="rating" id="r1">-->
-<!--                    <label for="r1"></label>-->
-
-<!--                    <input type="radio" name="rating" id="r2">-->
-<!--                    <label for="r2"></label>-->
-
-<!--                    <input type="radio" name="rating" id="r3">-->
-<!--                    <label for="r3"></label>-->
-
-<!--                    <input type="radio" name="rating" id="r4">-->
-<!--                    <label for="r4"></label>-->
-
-<!--                    <input type="radio" name="rating" id="r5">-->
-<!--                    <label for="r5"></label>-->
-
-<!--                </div>-->
-<!--                <form >-->
-<!--                    <a th:href="'/blog/edit/' + ${id}" class="btn btn-primary" style="background-color:#3D0000; margin-left:47.5%;border: #F9F3DF;">Edit</a >-->
-<!--                </form>-->
-<!--                <form >-->
-<!--                    <a th:href="'/blog/delete/' + ${id}" class="btn btn-primary" style="background-color:#3D0000; margin-left:47.5%;border: #F9F3DF;">Delete</a >-->
-<!--                </form>-->
             </div>
 
+        </div>
     </div>
-
 
 </main>
 

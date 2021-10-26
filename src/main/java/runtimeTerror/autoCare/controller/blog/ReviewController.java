@@ -36,8 +36,8 @@ public class ReviewController {
     @GetMapping("/reviews")
     public String getReviewsPage(Principal principal, Model model) {
         User user = userRepository.findUserByUsername(principal.getName());
-        List<Review> reviews = reviewRepository.findAllByUser_Username(user.getUsername()).orElseThrow();
-//        model.addAttribute("user",user);
+        List<Review> reviews = reviewRepository.findAll();
+        model.addAttribute("user",user);
         model.addAttribute("reviews",reviews);
         model.addAttribute("principal", principal.getName());
         return "/blog/reviews";
