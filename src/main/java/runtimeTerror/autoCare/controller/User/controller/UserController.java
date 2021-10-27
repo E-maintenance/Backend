@@ -88,26 +88,26 @@ public class UserController {
 
     @PostMapping ("/User/login")
     public String loginpostAdmin(@ModelAttribute User user){
-        User usertest= userRepository.findUserByUsername(user.getUsername());
+       User usertest= userRepository.findUserByUsername(user.getUsername());
 
-        if(usertest!=null){
-            String x =  (user.getPassword());
-            String y =  (usertest.getPassword());
-            System.out.println("--------------------------------------");
-            System.out.println(x);
-            System.out.println(y);
-            if(BCrypt.checkpw(x, y)){
-                Authentication authentication = new UsernamePasswordAuthenticationToken(usertest, null, usertest.getAuthorities());
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-                return "redirect:/";
-            }
-            else{
-                return "redirect:/User/login?error=wrongpass";
-            }
-        }
-        else{
-            return "redirect:/User/login?error=notexist";
-        }
+       if(usertest!=null){
+        String x =  (user.getPassword());
+           String y =  (usertest.getPassword());
+           System.out.println("--------------------------------------");
+           System.out.println(x);
+           System.out.println(y);
+           if(BCrypt.checkpw(x, y)){
+               Authentication authentication = new UsernamePasswordAuthenticationToken(usertest, null, usertest.getAuthorities());
+               SecurityContextHolder.getContext().setAuthentication(authentication);
+               return "redirect:/";
+           }
+           else{
+               return "redirect:/User/login?error=wrongpass";
+           }
+       }
+       else{
+           return "redirect:/User/login?error=notexist";
+       }
     }
 
 
@@ -126,7 +126,7 @@ public class UserController {
 
     @GetMapping("/User/appointment")
     public String getAppointment(Model model){
-        List<WorkShop> shops= workShopRepository.findAll();
+      List<WorkShop> shops= workShopRepository.findAll();
         System.out.println(shops+"555555555555555555555");
         model.addAttribute("Shops",shops);
         return "/appointment/appointment";
