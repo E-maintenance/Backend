@@ -1,3 +1,4 @@
+
 package runtimeTerror.autoCare.controller.User.controller;
 
 import com.google.common.reflect.TypeToken;
@@ -89,6 +90,7 @@ public class UserController {
     @PostMapping ("/User/login")
     public String loginpostAdmin(@ModelAttribute User user){
        User usertest= userRepository.findUserByUsername(user.getUsername());
+
        if(usertest!=null){
         String x =  (user.getPassword());
            String y =  (usertest.getPassword());

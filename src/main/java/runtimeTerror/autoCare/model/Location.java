@@ -21,7 +21,6 @@ public class Location {
     }
 
 
-
     public void setWorkShop(WorkShop workShop) {
         this.workShop = workShop;
     }
