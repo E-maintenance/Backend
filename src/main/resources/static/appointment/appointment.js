@@ -172,8 +172,7 @@ function updatePos()
 
 }
 
-$( document ).ready(function()
-{
+$( document ).ready(function(){
 
 	/**********
 	Function that checks the internet connection
