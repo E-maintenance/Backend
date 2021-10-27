@@ -5,11 +5,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import runtimeTerror.autoCare.dto.UserRegistrationDto;
 import runtimeTerror.autoCare.model.blog.Review;
+import runtimeTerror.autoCare.model.blog.WorkshopReview;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -28,8 +30,13 @@ public class User implements UserDetails {
     private  String phone;
     private String password;
 
-    @OneToOne(mappedBy = "user")
-    private Review review;
+    @OneToMany (mappedBy = "user")
+    private List <Review> reviews;
+
+
+    @OneToMany(mappedBy = "user")
+    private List <WorkshopReview> workshopReview;
+
 
     public User() {
     }
@@ -53,11 +60,10 @@ public class User implements UserDetails {
     }
 
 
-    public User(String fullname, String username, String email, Review review) {
+    public User(String fullname, String username, String email ) {
         this.fullname = fullname;
         this.username = username;
         this.email = email;
-        this.review = review;
     }
 
     public String getFullname() {
@@ -70,14 +76,22 @@ public class User implements UserDetails {
 
 
 
-    public Review getReview() {
-        return review;
+    public List <Review> getReview() {
+        return reviews;
     }
 
-    public void setReview(Review review) {
-        this.review = review;
+    public void setReview(List <Review> reviews) {
+        this.reviews = reviews;
     }
 
+
+    public List <WorkshopReview> getWorkshopReview() {
+        return  workshopReview;
+    }
+
+    public void setWorkshopReview(List <WorkshopReview> workshopReview) {
+        this.workshopReview =  workshopReview;
+    }
 
     public boolean isVerified() {
         return isVerified;
