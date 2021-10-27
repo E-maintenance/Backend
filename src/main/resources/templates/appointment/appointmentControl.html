@@ -109,7 +109,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script th:inline="javascript">
-    //Data Array
+    /*<![CDATA[*/
+
+    var user = /*[[${appointments}]]*/ [];
+    console.log(user)
+
 
 var appointments =new Array();
 var j = 0;
@@ -678,7 +682,7 @@ $( document ).ready(function(){
 
 });
 
-
+    /*]]>*/
 
 </script>
 </body>
