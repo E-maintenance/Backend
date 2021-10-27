@@ -65,10 +65,7 @@ public class WorkShopController {
         return "workShop/loginSignup";
     }
 
-    @GetMapping("/appointment-control")
-    public String getAppointment() {
-        return "/appointment/appointmentControl";
-    }
+
 
 
 
