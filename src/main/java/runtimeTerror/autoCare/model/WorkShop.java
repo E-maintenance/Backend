@@ -133,13 +133,13 @@ public class WorkShop implements UserDetails {
         this.category = category;
     }
 
-//    @Override
-//    public String toString() {
-//        return
-//                 "{"+"\"id\""+":\""+ id +
-//                "\"," +"\"username\""+":\""+ username + "\"," +"\"shopName\""+":\""+ shopName +  location.toString()+"\"}"
-//                ;
-//    }
+    @Override
+    public String toString() {
+        return
+                 "{"+"\"id\""+":\""+ id +
+                "\"," +"\"username\""+":\""+ username + "\"," +"\"shopName\""+":\""+ shopName +  location.toString()+"\"}"
+                ;
+    }
 
 
     public Long getId() {
