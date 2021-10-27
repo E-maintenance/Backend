@@ -43,7 +43,7 @@ import javax.mail.internet.MimeMessage;
     }
 
 
-    String buildEmail(String name, String link) {
+    public String buildEmail(String name, String link) {
         return
                 "<div style=\"margin-top: 100px; border: 18px solid #f4f4f4; border-radius: 25px; \">"
                 +"\n"+

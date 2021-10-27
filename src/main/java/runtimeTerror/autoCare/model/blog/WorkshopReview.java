@@ -2,14 +2,12 @@ package runtimeTerror.autoCare.model.blog;
 
 
 import runtimeTerror.autoCare.model.User;
-import runtimeTerror.autoCare.model.WorkShop;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-public class Review {
-
+public class WorkshopReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
@@ -19,19 +17,19 @@ public class Review {
     private Timestamp createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    public Review() {
+    public WorkshopReview() {
     }
 
-    public Review(String body, Timestamp createdAt, User user) {
+    public WorkshopReview(String body, Timestamp createdAt, User user) {
         this.body = body;
         this.createdAt = createdAt;
         this.user = user;
     }
 
-    public Review(String body, Timestamp createdAt) {
+    public WorkshopReview(String body, Timestamp createdAt) {
         this.body = body;
         this.createdAt = createdAt;
     }
