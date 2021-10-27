@@ -34,8 +34,8 @@ public class AdminController  {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    @Autowired
-    EmailServiceImpl service;
+    @Autowired    EmailServiceImpl service;
+
 
     @GetMapping("/admin/register")
     public String registerAdmin(Model model){
