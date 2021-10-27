@@ -24,7 +24,18 @@ public class WorkShop implements UserDetails {
     String password;
     String shopName;
     String category;
+    double num =0;
+    double rate=0;
 
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        num++;
+     double x=   this.rate+rate;
+      this.rate=x/num;
+    }
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id")

@@ -35,8 +35,8 @@ public class WorkShopRevController {
     @Autowired
     WorkShopRepository workShopRepository;
 
-    @GetMapping("/workshopRev")
-    public String getWorkshopReviews(Principal principal, Model model) {
+    @GetMapping("/workshopRev/{id}")
+    public String getWorkshopReviews(Principal principal, Model model,@PathVariable Long id) {
         User user = userRepository.findUserByUsername(principal.getName());
 //         WorkShop workShop = workShopRepository.findWorkShopById(id);
         List<WorkshopReview> workshopReviews = workshopRevRepository.findAllByUser_Username(user.getUsername()).orElseThrow();
@@ -46,15 +46,17 @@ public class WorkShopRevController {
     }
 
     @PostMapping("/workshopRev/{id}")
-
-    public String createWorkshopRev (@ModelAttribute WorkshopReview workshopReviews){
+    public String createWorkshopRev (@ModelAttribute WorkshopReview workshopReviews,@PathVariable Long id){
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.findUserByUsername(userDetails.getUsername());
+       WorkShop workShop= workShopRepository.findWorkShopById(id);
+        workShop.setRate(Double.parseDouble(workshopReviews.getRate()));
+        workShopRepository.save(workShop);
         workshopReviews.setUser(user);
         workshopRevRepository.save(workshopReviews);
         userRepository.save(user);
         user.setWorkshopReview(Collections.singletonList(workshopReviews));
-        return ("redirect:/workshopRev");
+        return ("redirect:/workShopProfile/{id}");
     }
 
 
