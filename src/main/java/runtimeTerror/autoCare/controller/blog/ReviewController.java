@@ -1,12 +1,18 @@
 package runtimeTerror.autoCare.controller.blog;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 import runtimeTerror.autoCare.model.User;
+import runtimeTerror.autoCare.model.WorkShopFeeds;
 import runtimeTerror.autoCare.model.blog.Review;
 import runtimeTerror.autoCare.repository.UserRepository;
 import runtimeTerror.autoCare.repository.blog.ReviewRepository;
@@ -15,6 +21,9 @@ import java.security.Principal;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 public class ReviewController {
@@ -25,36 +34,42 @@ public class ReviewController {
     UserRepository userRepository;
 
     @GetMapping("/reviews")
-    public String getMyProfilePage(Principal principal, Model model) {
-        User user = userRepository.findUserByUsername(principal.getName());
+    public String getReviewsPage(Principal principal, Model model) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.findUserByUsername(userDetails.getUsername());
+        List<Review> reviews = reviewRepository.findAll();
         model.addAttribute("user",user);
+        model.addAttribute("reviews",reviews);
         model.addAttribute("principal", principal.getName());
-        return "reviews";
+        return "/blog/reviews";
     }
 
     @PostMapping("/reviews")
-    public RedirectView createPost(Principal principal, Model model, String body) throws ParseException {
-        User user = userRepository.findUserByUsername(principal.getName());
-        if(user != null){
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-            sdf.format(timestamp);
-            Review review = new Review(body, timestamp, user);
-            reviewRepository.save(review);
-        }
 
-        model.addAttribute("principal", principal.getName());
-        model.addAttribute("user", user);
-        model.addAttribute("reviews" , user.getReview());
-        return new RedirectView("/reviews");
+    public String createReview (@ModelAttribute Review reviews){
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.findUserByUsername(userDetails.getUsername());
+        reviews.setUser(user);
+        reviewRepository.save(reviews);
+        userRepository.save(user);
+        user.setReview(Collections.singletonList(reviews));
+        return ("redirect:/reviews");
     }
-
     @GetMapping("/addReview")
     public String getReviewPage(Model model,Principal principal) {
         User user =  userRepository.findUserByUsername(principal.getName());
         model.addAttribute("user",user);
 
-        return "addReview";
+        return "/blog/addReview";
+    }
+
+
+    @GetMapping("/deleteReview/{id}")
+    public String deleteReview(@PathVariable("id") Long id, Model model){
+          Review review = reviewRepository.findReviewById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid review Id:" + id));
+        reviewRepository.deleteById(id);
+        return "redirect:/reviews";
     }
 
 //    @GetMapping("/blog/edit/{id}")
