@@ -1,6 +1,8 @@
 package runtimeTerror.autoCare.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Appointment {
@@ -64,11 +66,17 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return "appointment{" +
-                "id=" + id +
-                ", status='" + status + '\'' +
-                ", user=" + user +
-                ", workShop=" + workShop.toString() +
-                '}';
+        List<String> list = new ArrayList<>() ;
+        list.add(id+"");
+        list.add(status+"");
+        list.add(user.getId()+"");
+        list.add(user.getUsername()+"");
+        return list.toString();
+//        return "appointment{" +
+//                "id=" + id +
+//                ", status='" + status + '\'' +
+//                ", user=" + user +
+//                ", workShop=" + workShop.toString() +
+//                '}';
     }
 }
