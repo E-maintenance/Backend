@@ -111,7 +111,6 @@ public class UserController {
     }
 
 
-
     @GetMapping("/User/register/verification/{token}")
     public String verificationEmail(Model m, @PathVariable String token){
         Verification verified = verifiedRepository.findVerificationByToken(token);
