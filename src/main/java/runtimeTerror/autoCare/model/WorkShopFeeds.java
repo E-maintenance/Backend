@@ -1,15 +1,14 @@
 package runtimeTerror.autoCare.model;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 
 @Entity
 public class WorkShopFeeds {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -19,11 +18,7 @@ public class WorkShopFeeds {
     String image;
 
 
-    @CreationTimestamp
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
-    private LocalDateTime createAt;
-
+    long timeNow = new Date().getTime();
 
     @ManyToOne
     @JoinColumn(name="workshop_id")
@@ -34,10 +29,9 @@ public class WorkShopFeeds {
     }
 
 
-    public WorkShopFeeds(String feeds, String image, LocalDateTime createAt, WorkShop workShop) {
+    public WorkShopFeeds(String feeds, String image, WorkShop workShop) {
         this.feeds = feeds;
         this.image = image;
-        this.createAt = createAt;
         this.workShop = workShop;
     }
 
@@ -62,12 +56,32 @@ public class WorkShopFeeds {
         this.image = image;
     }
 
-    public LocalDateTime getCreateAt() {
-        return createAt;
+    public String getTimeNow() {
+
+        String time = "";
+
+        long defTime = new Date().getTime() - timeNow;
+        if(defTime < 1000*60){
+            time = TimeUnit.MILLISECONDS.toSeconds(defTime) + " seconds ago";
+        }
+
+        else if(defTime < 1000*60*60){
+            time =  TimeUnit.MILLISECONDS.toMinutes(defTime) + " minutes ago";
+        }
+
+        else if(defTime < 1000*60*60*60){
+            time = TimeUnit.MILLISECONDS.toHours(defTime) + " hours ago";
+        }
+
+        else if(defTime < (long) 1000*60*60*60*24){
+            time = TimeUnit.MILLISECONDS.toDays(defTime) + " days ago";
+        }
+
+         return time;
     }
 
-    public void setCreateAt(LocalDateTime createAt) {
-        this.createAt = createAt;
+    public void setTimeNow(long timeNow) {
+        this.timeNow = timeNow;
     }
 
     public WorkShop getWorkShop() {

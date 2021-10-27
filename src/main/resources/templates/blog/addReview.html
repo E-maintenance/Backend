@@ -6,21 +6,56 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         crossorigin="anonymous"
 >
+<link rel="stylesheet" href="/reviewCss/addReview.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" />
+
 <head>
     <meta charset="UTF-8">
     <title>Add review</title>
 </head>
+<!--<body>-->
+<!--<main>-->
+<!--    <form method="POST" th:action="@{/reviews}" >-->
+
+<!--        <label  for="body">-->
+<!--            <p class="display-4" style="padding: 50px;">Add a Review</p>-->
+<!--            <textarea name="body" id="body" class="input" rows="10" cols="600" style="width:50%"></textarea>-->
+<!--        </label>-->
+
+<!--        <input type="Submit" value="Add" class="btn btn-primary" style="background-color:#3D0000; margin-left:44%;border: #F9F3DF;color:white; margin-right:46.5%;font-weight:bold;"/>-->
+<!--    </form>-->
+<!--</main>-->
+<!--</body>-->
+
 <body>
-<main>
-    <form method="POST" th:action="@{/reviews}" >
+<div class="container">
+    <div class="post">
+        <div class="text">Thanks for rating us!</div>
+        <div class="edit">EDIT</div>
+    </div>
+    <div style="color:white"><h1>Rate Us </h1></div>
+    <div class="star-widget">
+        <input type="radio" name="rate" id="rate-5">
+        <label for="rate-5" class="fas fa-star"></label>
+        <input type="radio" name="rate" id="rate-4">
+        <label for="rate-4" class="fas fa-star"></label>
+        <input type="radio" name="rate" id="rate-3">
+        <label for="rate-3" class="fas fa-star"></label>
+        <input type="radio" name="rate" id="rate-2">
+        <label for="rate-2" class="fas fa-star"></label>
+        <input type="radio" name="rate" id="rate-1">
+        <label for="rate-1" class="fas fa-star"></label>
+        <form method="POST" th:action="@{/reviews}">
+            <header></header>
+            <div class="textarea">
+                <textarea cols="30" name="body" id="body" style="color:white" placeholder="Describe your experience.."></textarea>
+            </div>
+            <div class="btn">
+                <button type="submit" style="color:white">Post</button>
+            </div>
+        </form>
+    </div>
+</div>
 
-        <label  for="body">
-            <p class="display-4" style="padding: 50px;">Add a Review</p>
-            <textarea name="body" id="body" class="input" rows="10" cols="600" style="width:50%"></textarea>
-        </label>
-
-        <input type="Submit" value="Add" class="btn btn-primary" style="background-color:#3D0000; margin-left:44%;border: #F9F3DF;color:white; margin-right:46.5%;font-weight:bold;"/>
-    </form>
-</main>
 </body>
 </html>
