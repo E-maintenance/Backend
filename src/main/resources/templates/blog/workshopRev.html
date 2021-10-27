@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Workshop reviews</title>
+</head>
+<body>
+
+<main>
+    <p class="lead"> Reviews </p>
+<!--    <form th:object="${workShop}" >-->
+<!--        <a th:href="@{/addWorkshopRev/{id}(id=${workShop.id})}" class="btn btn-primary" style="background-color:#3D0000; margin-left:47.5%;border: #F9F3DF;">Add Review</a >-->
+<!--    </form>-->
+    <div th:each="workshopReview : ${workshopReviews}" style="border-style: solid;border-radius: 15px;border-width: medium; width:50%;text-align:center;margin-left:47%;margin-bottom:2%;">
+        <div >
+            <p ><span th:text="${workshopReview.body}"></span></p>
+            <p >Created at: <span th:text="${workshopReview.createdAt}"></span></p>
+            <a th:href="@{|/deleteWorkshopRev/${workshopReview.id}|}">Delete</a>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
