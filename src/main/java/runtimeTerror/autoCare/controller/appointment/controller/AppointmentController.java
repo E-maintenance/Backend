@@ -12,6 +12,7 @@ import runtimeTerror.autoCare.model.WorkShop;
 import runtimeTerror.autoCare.repository.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class AppointmentController {
@@ -39,6 +40,16 @@ public class AppointmentController {
         Appointment appointment = new Appointment("Pending",userid,workShop);
         appointmentRepository.save(appointment);
         return "/appointment/accepted";
+    }
+
+    @GetMapping("/appointment-control")
+    public String getAppointment(Model model,Principal principal){
+        WorkShop workShop = workShopRepository.findWorkShopByUsername(principal.getName());
+        List<Appointment>  appointment = appointmentRepository.findAllByWorkShop_Id(workShop.getId());
+        System.out.println(appointment);
+        model.addAttribute("appointments", appointment);
+
+        return "/appointment/appointmentControl";
     }
 
 //    @GetMapping("/accepted")
