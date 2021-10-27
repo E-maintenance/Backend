@@ -31,14 +31,19 @@
     </div>
     <div class="user signupBx">
       <div class="formBx">
-        <form method="post" th:action="@{/shop-signup}">
+        <form method="post" th:action="@{/shop-signup}"  >
           <h2>Create an account</h2>
           <input id="username" name="username" type="text" placeholder="Username" />
           <input id="password" name="password" type="password" placeholder="Create Password" />
 <!--          <input type="email" name="" placeholder="Email Address" />-->
-          <input id="shopName" name="shopName" type="text" placeholder="ShopName" />
+          <input id="shopName" name="shopName" type="text" placeholder="ShopName"  />
           <input id="category" name="category" type="text" placeholder="Category" />
-          <input id="location" name="location" type="text" placeholder="Location" />
+          <p>Click the button to get your coordinates.</p>
+          <br>
+          <p style="border-color: #1DC2F8;border-radius: 3px;" onclick="getLocation()">Click me</p>
+          <p id="demo"></p>
+          <input id="lat"  name="lat" type="text" placeholder="lat" style="display: none" />
+          <input id="lon"  name="lon" type="text" placeholder="lon" style="display: none"/>
           <input type="submit" name="" value="Sign Up" />
           <p class="signup">
             Already have an account ?
@@ -52,4 +57,20 @@
 </section>
 </body>
 <script type="text/javascript" src="workshop.js"></script>
+<script >
+
+  var x = document.getElementById("demo");
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  document.getElementById("lat").value = position.coords.latitude;
+  document.getElementById("lon").value = position.coords.longitude;
+}
+</script>
 </html>
