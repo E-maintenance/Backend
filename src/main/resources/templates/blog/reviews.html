@@ -34,7 +34,15 @@
 <!--    </div>-->
 
     <div class="review-container">
-        <h2>Reviews</h2>
+        <div>
+            <h2>Reviews</h2>
+            <a class="btn" th:href="@{/addReview}" style="float:right;margin-top:-85px;margin-left:300px">
+                <i class="fas fa-comment-dots" style="color:white; font-size:25px" ></i>
+                Add
+            </a>
+
+        </div>
+
         <div class="cards" th:each="review : ${reviews}" th:object="${user}">
             <div class="card">
                 <div class="card-top">
@@ -59,9 +67,13 @@
                     <a th:href="@{|/deleteReview/${review.id}|}">Delete</a>
                 </div>
 
+
+
             </div>
 
         </div>
+
+
     </div>
 
 </main>
