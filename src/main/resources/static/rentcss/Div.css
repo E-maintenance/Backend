@@ -31,5 +31,13 @@ float:right;
     height: 5px;
   background-color:#f8f8f8;
 }
+.page-title green-bg col-xs-8{
+  padding: 30px;
+  border: 1px solid rgba(255, 0, 0);
+  border-top: 1px solid rgba(255, 0, 0, .3);
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+
 
 

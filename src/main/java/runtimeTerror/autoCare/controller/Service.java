@@ -17,7 +17,7 @@ public class Service {
 
     @GetMapping("/rent")
     public String rent() {
-        return "NowRent";
+        return "rentpage";
     }
     @GetMapping("/rentnow")
     public String rentcar() {
