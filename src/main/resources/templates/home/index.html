@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org"
-       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:schemaLocation="http://www.thymeleaf.org/extras/spring-security ">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,7 +46,20 @@
                         <li class="scroll"><a href="#portfolio">Gallery</a></li>
                         <li class="scroll"><a href="#our-team">Team</a></li>
                         <li class="scroll"><a href="#pricing">Pricing</a></li>
-                        <li class="scroll"><a href="#contact-us">Contact</a></li>                        
+                        <li class="scroll"><a href="#contact-us">Contact</a></li>
+<!--                            <div class="navbar">-->
+<!--                                <div class="dropdown">-->
+<!--                                    <button class="dropBtn">Signup</button>-->
+<!--                                    <div class="dropdown-content">-->
+<!--                                        <div class="line">-->
+<!--                                            <a href="/User/register">As Customer</a>-->
+<!--                                        </div>-->
+<!--                                        <div class="line">-->
+<!--                                            <a href="/shop-signup">As Workshop</a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
                     </ul>
                 </div>
             </div><!--/.container-->
@@ -61,7 +74,10 @@
                                  <br><br>
                                     <h2>Best Car Servicing</h2>
                                     <p>Safety comes first, that’s our car workshop’s motto. We want you and your family to have the drive of your life and that is why it is our car garage’s priority is to make your journey as smooth as possible</p>
-                                    <a class="btn btn-primary btn-lg" href="#pricing">Our Price</a>
+                                    <div sec:authorize="isAuthenticated()">
+                                        <a class="btn btn-primary btn-lg" href="/User/appointment">Book an appointment</a>
+                                    </div>
+
                                 
                             </div>
                         </div>
@@ -283,10 +299,9 @@
    
    
     <section id="our-team">
-        <div class="container">
+        <div class="container" style="text-align:center">
             <div class="section-header">
                 <h2 class="section-title wow fadeInDown">Amazing Team</h2>
-                <p class="wow fadeInDown">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget risus vitae massa <br> semper aliquam quis mattis quam.</p>
             </div>
 			
 			 	
@@ -294,11 +309,11 @@
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="team-member wow fadeInUp" data-wow-duration="400ms" data-wow-delay="0ms">
                         <div class="team-img">
-                            <img class="img-responsive" src="https://retailx.com/wp-content/uploads/2019/12/iStock-476085198.jpg" alt="">
+                            <img class="img-responsive" src="https://avatars.githubusercontent.com/u/83532111?v=4" alt="">
                         </div>
                         <div class="team-info">
                             <h3>Naeem Al Omari</h3>
-                            <span>Founder</span> 
+                            <span>Team Leader</span>
                         </div> 
                         <ul class="social-icons">
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -311,11 +326,10 @@
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="team-member wow fadeInUp" data-wow-duration="400ms" data-wow-delay="100ms">
                         <div class="team-img">
-                            <img class="img-responsive" src="https://retailx.com/wp-content/uploads/2019/12/iStock-476085198.jpg" alt="">
+                            <img class="img-responsive" src="https://avatars.githubusercontent.com/u/70428861?v=4" alt="">
                         </div>
                         <div class="team-info">
                             <h3>Abed Kafaween</h3>
-                            <span>President</span> 
                         </div> 
                         <ul class="social-icons">
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -328,11 +342,10 @@
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="team-member wow fadeInUp" data-wow-duration="400ms" data-wow-delay="200ms">
                         <div class="team-img">
-                            <img class="img-responsive" src="https://retailx.com/wp-content/uploads/2019/12/iStock-476085198.jpg" alt="">
+                            <img class="img-responsive" src="https://avatars.githubusercontent.com/u/71646355?v=4" alt="">
                         </div>
                         <div class="team-info">
                             <h3>Deyaa Pozan</h3>
-                            <span>Manager</span> 
                         </div> 
                         <ul class="social-icons">
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -345,11 +358,10 @@
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="team-member wow fadeInUp" data-wow-duration="400ms" data-wow-delay="300ms">
                         <div class="team-img">
-                            <img class="img-responsive" src="https://retailx.com/wp-content/uploads/2019/12/iStock-476085198.jpg" alt="">
+                            <img class="img-responsive" src="https://avatars.githubusercontent.com/u/83532142?v=4" alt="">
                         </div>
                         <div class="team-info">
                             <h3>Mohammad AbuKhalel</h3>
-                            <span>Manager</span> 
                         </div> 
                         <ul class="social-icons">
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -361,6 +373,58 @@
                 </div>
             </div>
 
+            <div class="row text-center" style="margin-left:118px;" >
+                <div class="col-md-3 col-sm-6 col-xs-12" style="width: 28%;">
+                    <div class="team-member wow fadeInUp" data-wow-duration="400ms" data-wow-delay="0ms">
+                        <div class="team-img">
+                            <img class="img-responsive" src="https://avatars.githubusercontent.com/u/83520024?v=4" alt="">
+                        </div>
+                        <div class="team-info">
+                            <h3>Rawan Alazazi</h3>
+
+                        </div>
+                        <ul class="social-icons">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12" style="width: 28%;">
+                    <div class="team-member wow fadeInUp" data-wow-duration="400ms" data-wow-delay="100ms">
+                        <div class="team-img">
+                            <img class="img-responsive" src="https://avatars.githubusercontent.com/u/82310572?v=4" alt="">
+                        </div>
+                        <div class="team-info">
+                            <h3>Adham Al Omari</h3>
+                        </div>
+                        <ul class="social-icons">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12" style="width: 28%;">
+                    <div class="team-member wow fadeInUp" data-wow-duration="400ms" data-wow-delay="200ms">
+                        <div class="team-img">
+                            <img class="img-responsive" src="https://avatars.githubusercontent.com/u/82310737?v=4" alt="">
+                        </div>
+                        <div class="team-info">
+                            <h3>Abrar algour</h3>
+
+                        </div>
+                        <ul class="social-icons">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </section><!--/#our-team-->
 
@@ -368,7 +432,7 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title wow fadeInDown">Pricing</h2>
-                <p class="wow fadeInDown">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget risus vitae massa <br> semper aliquam quis mattis quam.</p>
+                <p class="wow fadeInDown">Today’s businesses want to buy services like they buy apps in the Apps Store.<br> We saw an opportunity to simplify our pricing and drive customer satisfaction through the roof.”</p>
             </div>
 
             <div class="row">
@@ -484,61 +548,7 @@
         </div>
     </section><!--/#pricing-->
 
-    <section class="testimonial-area" id="testimonial">
-			<div class="container">
-				<div class="section-header">
-                <h2 class="section-title wow fadeInDown">Testimonial</h2>
-                <p class="wow fadeInDown">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget risus vitae massa <br> semper aliquam quis mattis quam.</p>
-            </div>
-				<div class="row">
-					<div class="col-md-4">
-						<div class="single-testimonial animate_fade_in" style="opacity: 1; right: 0px;">
-							<div class="row">
-								<div class="col-xs-12">
-									<blockquote>Sontrary to popular belief, Lorem Ipsuis no simply random text. It has roots in a piece of classical Layears old. belief, Lorem Ipsuis not simply</blockquote>
-								</div>
-							</div>
-							<div class="row"> 
-								<div class="col-xs-12">
-									<h5>John Bond</h5>
-									<h6>Lorem Ipsuis simply</h6>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="single-testimonial animate_fade_in" style="opacity: 1; right: 0px;">
-							<div class="row">
-								<div class="col-xs-12">
-									<blockquote>Tontrary to popular belief, Lorem Ipsuis no simply random text. It has roots in a piece of classical Layears old. belief, Lorem Ipsuis not simply</blockquote>
-								</div>
-							</div>
-							<div class="row"> 
-								<div class="col-xs-12">
-									<h5>John Bond</h5>
-									<h6>Lorem Ipsuis simply</h6>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="single-testimonial animate_fade_in" style="opacity: 1; right: 0px;">
-							<div class="row">
-								<div class="col-xs-12">
-									<blockquote>Aontrary to popular belief, Lorem Ipsuis no simply random text. It has roots in a piece of classical Layears old. belief, Lorem Ipsuis not simply</blockquote>
-								</div>
-							</div>
-							<div class="row"> 
-								<div class="col-xs-12">
-									<h5>John Bond</h5>
-									<h6>Lorem Ipsuis simply</h6>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+
     <section id="contact-us">
         <div class="container">
             <div class="section-header">
