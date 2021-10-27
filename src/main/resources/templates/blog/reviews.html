@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:schemaLocation="http://www.thymeleaf.org/extras/spring-security ">
 <link
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         rel="stylesheet"
@@ -70,7 +70,7 @@
                     <p th:text="${review.timeNow}" class="card-text"></p>
                     <p th:text="${review.body}" style="font-size:17px"></p>
                 </div>
-                <div sec:authorize="hasAnyRole('Role_ADMIN')" >
+                <div sec:authorize="hasAnyRole('ADMIN')" >
                     <a th:href="@{|/deleteReview/${review.id}|}">Delete</a>
                 </div>
 
