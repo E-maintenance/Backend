@@ -1,4 +1,3 @@
-
 package runtimeTerror.autoCare.controller.User.controller;
 
 import com.google.common.reflect.TypeToken;
@@ -79,7 +78,7 @@ public class UserController {
         service.sendSimpleEmail(user.getEmail(),request.getRequestURL().toString()+"/verification/"+verified.getToken(),"please verified Email");
         verifiedRepository.save(verified);
         roleRepository.save(role);
-        return "redirect:/User/register?success";
+        return "redirect:/User/login";
     }
 
     @GetMapping("/User/login")
