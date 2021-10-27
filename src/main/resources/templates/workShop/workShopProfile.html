@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org" lang="en" >
+<html xmlns:th="https://www.thymeleaf.org" xmlns:text-justify="http://www.w3.org/1999/xhtml"
+      xmlns:text-align="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -10,84 +11,104 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
 <div>
-<nav style="height: 100px;" class="navbar navbar-light navbar-expand-lg bg-dark">
-    <div class="container-fluid">
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvasLg"
-             aria-labelledby="navbarOffcanvasLgLabel">
-            <div class="offcanvas-body">
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <li class="nav-item">
-                        <a style="color: #45aed6" class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a style="color: #45aed6" class="nav-link" href="#">Dashboard</a>
-                    </li>
-                    <form class="d-flex">
-                        <button style="background-color: #45aed6; color: whitesmoke; border: none;"
-                                class="btn btn-outline-primary" type="submit">Sign Out
-                        </button>
-                    </form>
-                </ul>
-            </div>
-        </div>
-    </div>
-</nav>
-
-<div class="container" >
-    <div class="row">
-        <div style="margin-left:-105px;width:12.5%"
-             class="col-sm-1 d-flex bg-dark  text-light text-center justify-content-evenly align-items-center">
-            <h2 style="font-size: 160px; color: #ffffff; margin-bottom: 500px; font-family: 'Poppins', sans-serif; font-weight:bold;">
-                W<br>O<br>R<br>K<BR>S<BR>H<BR>O<BR>P
-                P<br>R<br>O<BR>F<BR>I<BR>L<br>E
-            </h2>
-        </div>
-        <div class="col-sm-11">
-            <div class="row">
-                <form th:action="@{/feeds}" method="get">
-                    <div class="card  "
-                         style=" background-color:#fff ;width: 100%; margin-top: 35px; margin-left: 100px; border: none;">
-                        <img style="height: 500px "
-                             src="https://wallpapercave.com/wp/wp5052857.jpg"
-                             class="card-img-top" alt="...">
-                        <div class="card-body" style=" margin-left :15px"><br><br>
-                            <h4 style="color: #555; font-family: 'Poppins', sans-serif; font-weight:bold;" > User Name      : <span th:text="${workShop.username}" class="card-title"></span></h4><br>
-                            <h4 style="color: #555;font-family: 'Poppins', sans-serif; font-weight:bold;"> WorkShop Name    : <span th:text="${workShop.shopName}" class="card-text"></span></h4><br>
-                            <h4 style="color: #555; font-family: 'Poppins', sans-serif; font-weight:bold;"> WorkShop Category    : <span th:text="${workShop.category}" class="card-text"></span></h4><br>
-                            <!--<h4>Location : <span th:text="${workShop.location}" class="card-text"></span></h4><br>-->
-                            <br>
-                            <button type="submit" th:name="action" th:value="in" class="btn btn-primary"> ADD Your
-                                Feed
+    <nav style="height: 100px;" class="navbar navbar-light navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvasLg"
+                 aria-labelledby="navbarOffcanvasLgLabel">
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a style="color: #45aed6" class="nav-link active" aria-current="page" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="color: #45aed6" class="nav-link" href="#">Dashboard</a>
+                        </li>
+                        <form class="d-flex" th:action="@{/logout}" method="post">
+                            <button style="background-color: #45aed6; color: whitesmoke; border: none;"
+                                    class="btn btn-outline-primary" type="submit">Sign Out
                             </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                        </form>
 
-            <div class="row">
-                <div th:each="workShopFeed:${workShopFeeds}" class="feed">
-                    <div class="col-sm-5">
-                        <div class="card" style="margin-top: 35px;">
-                            <img th:src="${workShopFeed.image}" class="card-img-top" alt="..." src="">
-                            <div class="card-body">
-                                <p th:text="${workShopFeed.timeNow}" class="card-text"></p>
-                                <h5 th:text="${workShopFeed.feeds}" class="card-title"></h5><br>
-                                <a th:href="@{|/shop-edit/${workShopFeed.id}|}" class="btn btn-primary"> Edit </a>
-                                <a th:href="@{|/shop-delete/${workShopFeed.id}|}" class="btn btn-primary"> Delete </a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div style="margin-left:-105px;width:15%"
+                 class="col-sm-1 d-flex bg-dark  text-light text-center justify-content-space-between align-items-center">
+                <h2 style="font-size: 160px; color: #ffffff; margin-bottom: 500px; font-family: 'Poppins', sans-serif; font-weight:bold;">
+                    W<br>O<br>R<br>K<BR>S<BR>H<BR>O<BR>P
+                    P<br>R<br>O<BR>F<BR>I<BR>L<br>E
+                </h2>
+            </div>
+            <div class="col-sm-11">
+                <div class="row">
+                    <form th:action="@{/feeds}" method="get">
+                        <div class="card  "
+                             style=" background-color:#fff ;width: 100%; margin-top: 35px; margin-left: 100px; border: none;">
+                            <img style="height: 500px "
+                                 src="https://wallpapercave.com/wp/wp5052857.jpg"
+                                 class="card-img-top" alt="...">
+                            <div class="card-body" style=" margin-left :15px"><br><br>
+                                <h4 style="color: #555; font-family: 'Poppins', sans-serif; font-weight:bold;"> User
+                                    Name : <span th:text="${workShop.username}" class="card-title"></span></h4><br>
+                                <h4 style="color: #555;font-family: 'Poppins', sans-serif; font-weight:bold;"> WorkShop
+                                    Name : <span th:text="${workShop.shopName}" class="card-text"></span></h4><br>
+                                <h4 style="color: #555; font-family: 'Poppins', sans-serif; font-weight:bold;"> WorkShop
+                                    Category : <span th:text="${workShop.category}" class="card-text"></span></h4><br>
+                                <!--<h4>Location : <span th:text="${workShop.location}" class="card-text"></span></h4><br>-->
+                                <br>
+                                <button type="submit" th:name="action" th:value="in" class="btn btn-primary"> ADD Your
+                                    Feed
+                                </button>
+                            </div>
+                            <br><br>
+
+                            <div style="  display: flex; flex-wrap: wrap; background-color: #f1f1f1; margin: 10px;padding: 20px;font-size: 30px;">
+                                <!--                    <div class="row">-->
+
+                                <div th:each="workShopFeed:${workShopFeeds}" class="feed"
+                                     style=" text-align:justify; text-justify: inter-word;">
+
+
+                                    <!--                            <div class="col-sm-5">-->
+                                    <div class="card" style="margin-top: 35px; width: 300px; height:500px">
+                                        <img th:src="${workShopFeed.image}" class="card-img-top" alt="..." src=""
+                                             style="width:300px; height: 230px;">
+                                        <div class="card-body">
+
+                                            <p th:text="${workShopFeed.timeNow}" class="card-text"
+                                               style="font-size: 15px"></p><br>
+
+                                            <h5 th:text="${workShopFeed.feeds}" class="card-title"></h5><br>
+
+                                            <a th:href="@{|/shop-edit/${workShopFeed.id}|}" class="btn btn-primary">
+                                                Edit </a>
+                                            <a th:href="@{|/shop-delete/${workShopFeed.id}|}" class="btn btn-primary">
+                                                Delete </a>
+                                            <!--                                    </div>-->
+                                            <!--                                </div>-->
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<<<<<<< HEAD
+=======
 </div>
 
+>>>>>>> fed35b668f5072bc001e3e49309d3fa24e895fe8
 </body>
 </html>
-
-
 
 
 <!--<!DOCTYPE html>-->
