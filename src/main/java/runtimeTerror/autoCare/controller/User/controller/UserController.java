@@ -1,5 +1,7 @@
 package runtimeTerror.autoCare.controller.User.controller;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -21,6 +23,7 @@ import runtimeTerror.autoCare.repository.WorkShopRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.lang.reflect.Type;
 import java.security.Principal;
 import java.util.List;
 
@@ -118,7 +121,7 @@ public class UserController {
     @GetMapping("/User/appointment")
     public String getAppointment(Model model){
       List<WorkShop> shops= workShopRepository.findAll();
-
+        System.out.println(shops+"555555555555555555555");
         model.addAttribute("Shops",shops);
         return "/appointment/appointment";
     }
