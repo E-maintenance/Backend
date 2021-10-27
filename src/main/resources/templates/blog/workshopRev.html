@@ -13,8 +13,8 @@
 <!--    </form>-->
     <div th:each="workshopReview : ${workshopReviews}" style="border-style: solid;border-radius: 15px;border-width: medium; width:50%;text-align:center;margin-left:47%;margin-bottom:2%;">
         <div >
+            <p th:text="${workshopReview.timeNow}" class="card-text"></p>
             <p ><span th:text="${workshopReview.body}"></span></p>
-            <p >Created at: <span th:text="${workshopReview.createdAt}"></span></p>
             <a th:href="@{|/deleteWorkshopRev/${workshopReview.id}|}">Delete</a>
         </div>
     </div>
