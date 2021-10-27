@@ -42,7 +42,7 @@ public class WorkShopRevController {
         List<WorkshopReview> workshopReviews = workshopRevRepository.findAllByUser_Username(user.getUsername()).orElseThrow();
         model.addAttribute("workshopReviews", workshopReviews);
         model.addAttribute("principal", principal.getName());
-        return "/blog/workshopRev";
+        return "/workshop/userWorkShopProfile";
     }
 
     @PostMapping("/workshopRev/{id}")

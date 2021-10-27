@@ -15,14 +15,14 @@ public class AutoCareApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AutoCareApplication.class, args);	}
 
-	@Bean
-	CommandLineRunner initDatabase(RoleRepository roleRepository) {
-		return args -> {
-			log.info("Preloading " + roleRepository.save(new Role("ADMIN")));
-			log.info("Preloading " + roleRepository.save(new Role("CUSTOMER")));
-			log.info("Preloading " + roleRepository.save(new Role("WORKSHOP")));
-		};
-	}
+//	@Bean
+//	CommandLineRunner initDatabase(RoleRepository roleRepository) {
+//		return args -> {
+//			log.info("Preloading " + roleRepository.save(new Role("ADMIN")));
+//			log.info("Preloading " + roleRepository.save(new Role("CUSTOMER")));
+//			log.info("Preloading " + roleRepository.save(new Role("WORKSHOP")));
+//		};
+//	}
 
 
 }
