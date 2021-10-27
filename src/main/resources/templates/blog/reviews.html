@@ -11,10 +11,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Blog</title>
+    <title>Reviews</title>
 </head>
 <body>
+<header>
+    <div >
+        <a th:href="@{/}" style="font-size:35px;color:white;float:right;margin-top:-300px;margin-right:-950px" >
+            <i class="fa fa-home"   ></i>
+        </a>
+    </div>
 
+</header>
 <main>
 <!--    <p class="lead">All Reviews </p>-->
 <!--    <form >-->
@@ -37,7 +44,7 @@
         <div>
             <h2>Reviews</h2>
             <a class="btn" th:href="@{/addReview}" style="float:right;margin-top:-85px;margin-left:300px">
-                <i class="fas fa-comment-dots" style="color:white; font-size:25px" ></i>
+                <i class="far fa-comment-dots" style="color:white; font-size:25px" ></i>
                 Add
             </a>
 
@@ -60,10 +67,10 @@
                 </div>
 
                 <div class="card-content">
+                    <p th:text="${review.timeNow}" class="card-text"></p>
                     <p th:text="${review.body}" style="font-size:17px"></p>
                 </div>
-
-                <div sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                <div sec:authorize="hasAnyRole('Role_ADMIN')" >
                     <a th:href="@{|/deleteReview/${review.id}|}">Delete</a>
                 </div>
 

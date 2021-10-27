@@ -35,7 +35,8 @@ public class ReviewController {
 
     @GetMapping("/reviews")
     public String getReviewsPage(Principal principal, Model model) {
-        User user = userRepository.findUserByUsername(principal.getName());
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.findUserByUsername(userDetails.getUsername());
         List<Review> reviews = reviewRepository.findAll();
         model.addAttribute("user",user);
         model.addAttribute("reviews",reviews);
