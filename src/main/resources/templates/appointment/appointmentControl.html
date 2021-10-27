@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet"  th:href="@{/appointment/appointment.css}"  />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+<style id="clientListGroup">
+</style>
+
+<internetConection>
+    <off>
+        Please, verify your <br /> internet connection
+        <span class="material-icons">
+		signal_wifi_bad
+		</span>
+    </off>
+    <on>
+        Your internet <br /> connection is ready
+        <span class="material-icons">
+		signal_wifi_4_bar
+		</span>
+    </on>
+</internetConection>
+
+<div class="global">
+
+    <header>
+
+        <counter>
+            <div class="box schedule">
+                <b>Schedule</b> <span>appointments</span>
+                <value>0</value>
+            </div>
+            <div class="box ok">
+                <b>Confirmed</b> <span>appointments</span>
+                <value>0</value>
+            </div>
+            <div class="box canceled">
+                <b>Canceled</b> <span>appointments</span>
+                <value>0</value>
+            </div>
+        </counter>
+
+        <performance>
+            <bar class="ok"></bar>
+            <bar class="canceled"></bar>
+            <status>Aguarde...</status>
+        </performance>
+
+        <actionLine>
+            <button class="add">Add Client</button>
+            <button class="filter">Filter</button>
+        </actionLine>
+
+        <filter>
+            <input type="text" name="lineFilter" id="lineFilter" placeholder="Type 3 letters or more" />
+            <button class="close">x</button>
+        </filter>
+
+    </header>
+
+    <clientPanel>
+
+        <h2>In attendance</h2>
+
+        <!--
+        <obj>
+            <clientName>Carlos</clientName><startTime>0000-00-00 00:00:00</startTime><timeCounter><O_CD><hour>00h</hour><min>00</min><sec>00</sec></O_CD></timeCounter><O_Act><button class="btnFinish">Finish</button></O_Act>
+        </obj>
+        -->
+
+    </clientPanel>
+
+    <lineNavigator>
+        <top>Top</top>
+    </lineNavigator>
+
+    <line>
+
+        Loading...
+
+        <!--
+            <obj>
+                <O_pos>1º</O_pos>
+                <O_Name>Alan</O_Name>
+                <O_time>9/29/2021, 2:00:00 PM</O_time>
+                <O_CD><hour>00h</hour><min>00</min><sec>00</sec></O_CD>
+                <O_Act>
+                    <button class="btnStart">Start</button>
+                    <button class="btnExclude">Exclude</button>
+                </O_Act>
+            </obj>
+        -->
+
+    </line>
+
+</div>
+<script th:src = "@{/appointment/appointment.js}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+</body>
+</html>
