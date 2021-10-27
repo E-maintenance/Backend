@@ -3,15 +3,16 @@ package runtimeTerror.autoCare.controller.User.controller;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import runtimeTerror.autoCare.controller.admin.controller.EmailServiceImpl;
 import runtimeTerror.autoCare.dto.UserRegistrationDto;
 import runtimeTerror.autoCare.model.Role;
@@ -87,24 +88,28 @@ public class UserController {
 
     @PostMapping ("/User/login")
     public String loginpostAdmin(@ModelAttribute User user){
-       User usertest= userRepository.findUserByUsername(user.getUsername());
-       if(usertest!=null){
-        String x =  (user.getPassword());
-           String y =  (usertest.getPassword());
-           System.out.println("--------------------------------------");
-           System.out.println(x);
-           System.out.println(y);
-           if(BCrypt.checkpw(x, y)){
-               return "redirect:/";
-           }
-           else{
-               return "redirect:/User/login?error=wrongpass";
-           }
-       }
-       else{
-           return "redirect:/User/login?error=notexist";
-       }
+        User usertest= userRepository.findUserByUsername(user.getUsername());
+
+        if(usertest!=null){
+            String x =  (user.getPassword());
+            String y =  (usertest.getPassword());
+            System.out.println("--------------------------------------");
+            System.out.println(x);
+            System.out.println(y);
+            if(BCrypt.checkpw(x, y)){
+                Authentication authentication = new UsernamePasswordAuthenticationToken(usertest, null, usertest.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                return "redirect:/";
+            }
+            else{
+                return "redirect:/User/login?error=wrongpass";
+            }
+        }
+        else{
+            return "redirect:/User/login?error=notexist";
+        }
     }
+
 
 
     @GetMapping("/User/register/verification/{token}")
@@ -121,7 +126,7 @@ public class UserController {
 
     @GetMapping("/User/appointment")
     public String getAppointment(Model model){
-      List<WorkShop> shops= workShopRepository.findAll();
+        List<WorkShop> shops= workShopRepository.findAll();
         System.out.println(shops+"555555555555555555555");
         model.addAttribute("Shops",shops);
         return "/appointment/appointment";
