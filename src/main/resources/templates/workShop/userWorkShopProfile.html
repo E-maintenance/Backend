@@ -19,9 +19,6 @@
             <li class="nav-item">
               <a style="color: #45aed6" class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
-            <li class="nav-item">
-              <a style="color: #45aed6" class="nav-link" href="#">Dashboard</a>
-            </li>
             <form class="d-flex">
             </form>
           </ul>
@@ -51,8 +48,11 @@
                 <h4 style="color: #555; font-family: 'Poppins', sans-serif; font-weight:bold;" > User Name      : <span th:text="${workShop.username}" class="card-title"></span></h4><br>
                 <h4 style="color: #555;font-family: 'Poppins', sans-serif; font-weight:bold;"> WorkShop Name    : <span th:text="${workShop.shopName}" class="card-text"></span></h4><br>
                 <h4 style="color: #555; font-family: 'Poppins', sans-serif; font-weight:bold;"> WorkShop Category    : <span th:text="${workShop.category}" class="card-text"></span></h4><br>
+                <h4 style="color: #555; font-family: 'Poppins', sans-serif; font-weight:bold;"> WorkShop Rate   : <span th:text="${workShop.rate}" class="card-text"></span></h4><br>
                 <br>
                 <button type="submit" th:name="action" th:value="in" class="btn btn-primary"> Make Appointment
+                </button>
+
                 </button>
               </div>
             </div>
