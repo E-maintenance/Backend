@@ -38,25 +38,26 @@
       </div>
       <div class="col-sm-11">
         <div class="row">
-          <form th:action="@{/make-appointmant/__${shop_Id}__/__${user_Id}__}" method="get">
+
             <div class="card  "
                  style=" background-color:#fff ;width: 100%; margin-top: 35px; margin-left: 100px; border: none;">
               <img style="height: 500px "
                    src="https://wallpapercave.com/wp/wp5052857.jpg"
                    class="card-img-top" alt="...">
               <div class="card-body" style=" margin-left :15px"><br><br>
+                <form th:action="@{/make-appointmant/__${shop_Id}__/__${user_Id}__}" method="get">
                 <h4 style="color: #555; font-family: 'Poppins', sans-serif; font-weight:bold;" > User Name      : <span th:text="${workShop.username}" class="card-title"></span></h4><br>
                 <h4 style="color: #555;font-family: 'Poppins', sans-serif; font-weight:bold;"> WorkShop Name    : <span th:text="${workShop.shopName}" class="card-text"></span></h4><br>
                 <h4 style="color: #555; font-family: 'Poppins', sans-serif; font-weight:bold;"> WorkShop Category    : <span th:text="${workShop.category}" class="card-text"></span></h4><br>
                 <h4 style="color: #555; font-family: 'Poppins', sans-serif; font-weight:bold;"> WorkShop Rate   : <span th:text="${workShop.rate}" class="card-text"></span></h4><br>
                 <br>
-                <button type="submit" th:name="action" th:value="in" class="btn btn-primary"> Make Appointment
+                </form>
+                <button type="submit" th:action="@{/make-appointmant/__${shop_Id}__/__${user_Id}__}" th:name="action" th:value="in" class="btn btn-primary"> Make Appointment
                 </button>
-
-                </button>
+<!--                th:onclick="|window.location.href='@{/User/login}'|"-->
               </div>
             </div>
-          </form>
+
         </div>
 
         <div class="row">

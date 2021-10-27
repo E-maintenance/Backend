@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org"
-       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:schemaLocation="http://www.thymeleaf.org/extras/spring-security ">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,7 +46,20 @@
                         <li class="scroll"><a href="#portfolio">Gallery</a></li>
                         <li class="scroll"><a href="#our-team">Team</a></li>
                         <li class="scroll"><a href="#pricing">Pricing</a></li>
-                        <li class="scroll"><a href="#contact-us">Contact</a></li>                        
+                        <li class="scroll"><a href="#contact-us">Contact</a></li>
+<!--                            <div class="navbar">-->
+<!--                                <div class="dropdown">-->
+<!--                                    <button class="dropBtn">Signup</button>-->
+<!--                                    <div class="dropdown-content">-->
+<!--                                        <div class="line">-->
+<!--                                            <a href="/User/register">As Customer</a>-->
+<!--                                        </div>-->
+<!--                                        <div class="line">-->
+<!--                                            <a href="/shop-signup">As Workshop</a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
                     </ul>
                 </div>
             </div><!--/.container-->
@@ -61,7 +74,10 @@
                                  <br><br>
                                     <h2>Best Car Servicing</h2>
                                     <p>Safety comes first, that’s our car workshop’s motto. We want you and your family to have the drive of your life and that is why it is our car garage’s priority is to make your journey as smooth as possible</p>
-                                    <a class="btn btn-primary btn-lg" href="#pricing">Our Price</a>
+                                    <div sec:authorize="isAuthenticated()">
+                                        <a class="btn btn-primary btn-lg" href="/User/appointment">Book an appointment</a>
+                                    </div>
+
                                 
                             </div>
                         </div>
