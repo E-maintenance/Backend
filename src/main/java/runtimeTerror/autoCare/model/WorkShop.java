@@ -28,7 +28,7 @@ public class WorkShop implements UserDetails {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id")
-   private Location location ;
+    private Location location ;
 
     public Location getLocation() {
         return location;
