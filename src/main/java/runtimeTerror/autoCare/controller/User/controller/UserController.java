@@ -1,15 +1,16 @@
+
 package runtimeTerror.autoCare.controller.User.controller;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import runtimeTerror.autoCare.controller.admin.controller.EmailServiceImpl;
 import runtimeTerror.autoCare.dto.UserRegistrationDto;
 import runtimeTerror.autoCare.model.Role;
@@ -23,6 +24,7 @@ import runtimeTerror.autoCare.repository.WorkShopRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.lang.reflect.Type;
 import java.security.Principal;
 import java.util.List;
 
@@ -104,11 +106,6 @@ public class UserController {
     }
 
 
-//    @GetMapping("/")
-//    public String index() {
-//        return "home";
-//    }
-
 
     @GetMapping("/User/register/verification/{token}")
     public String verificationEmail(Model m, @PathVariable String token){
@@ -125,7 +122,7 @@ public class UserController {
     @GetMapping("/User/appointment")
     public String getAppointment(Model model){
       List<WorkShop> shops= workShopRepository.findAll();
-
+        System.out.println(shops+"555555555555555555555");
         model.addAttribute("Shops",shops);
         return "/appointment/appointment";
     }
