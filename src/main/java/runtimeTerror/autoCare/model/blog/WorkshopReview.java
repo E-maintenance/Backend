@@ -22,7 +22,16 @@ public class WorkshopReview {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
+    private String rate;
     public WorkshopReview() {
+    }
+
+    public String getRate() {
+        return rate;
+    }
+
+    public void setRate(String rate) {
+        this.rate = rate;
     }
 
     public WorkshopReview(String body, Timestamp createdAt, User user) {
