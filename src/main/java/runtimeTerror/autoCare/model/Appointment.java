@@ -64,19 +64,19 @@ public class Appointment {
         this.workShop = workShop;
     }
 
-    @Override
-    public String toString() {
-        List<String> list = new ArrayList<>() ;
-        list.add(id+"");
-        list.add(status+"");
-        list.add(user.getId()+"");
-        list.add(user.getUsername()+"");
-        return list.toString();
+//    @Override
+//    public String toString() {
+//        List<String> list = new ArrayList<>() ;
+//        list.add(id+"");
+//        list.add(status+"");
+//        list.add(user.getId()+"");
+//        list.add(user.getUsername()+"");
+//        return list.toString();
 //        return "appointment{" +
 //                "id=" + id +
 //                ", status='" + status + '\'' +
 //                ", user=" + user +
 //                ", workShop=" + workShop.toString() +
 //                '}';
-    }
+//    }
 }
