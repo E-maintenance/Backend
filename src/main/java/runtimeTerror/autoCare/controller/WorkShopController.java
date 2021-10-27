@@ -46,7 +46,9 @@ public class WorkShopController {
     @PostMapping("/shop-signup")
     public String attemptSignUp(@ModelAttribute WorkShop workShop ,@ModelAttribute Location loc) {
         System.out.println("--------------------------------------------------------------");
-
+//        System.out.println(workShop);
+//        System.out.println(loc);
+        
         locationRepository.save(loc);
         workShop.setPassword(passwordEncoder.encode(workShop.getPassword()));
         workShop.setLocation(loc);
