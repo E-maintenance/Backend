@@ -48,7 +48,7 @@ public class WorkShopController {
         System.out.println("--------------------------------------------------------------");
 //        System.out.println(workShop);
 //        System.out.println(loc);
-
+        
         locationRepository.save(loc);
         workShop.setPassword(passwordEncoder.encode(workShop.getPassword()));
         workShop.setLocation(loc);
