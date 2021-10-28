@@ -43,10 +43,12 @@
                         <li class="scroll active"><a href="#home">Home</a></li> 
                         <li class="scroll"><a href="#services">Services</a></li>
                         <li class="scroll"><a href="#about">About</a></li>
-                        <li class="scroll"><a href="#portfolio">Gallery</a></li>
-                        <li class="scroll"><a href="#our-team">Team</a></li>
-                        <li class="scroll"><a href="#pricing">Pricing</a></li>
                         <li class="scroll"><a href="#contact-us">Contact</a></li>
+                        <li  sec:authorize="!isAuthenticated()" class="scroll"><a href="/User/register">Customer</a></li>
+                        <li  sec:authorize="!isAuthenticated()" class="scroll"><a href="/shop-signup">WorkShop</a></li>
+                        <li  sec:authorize="isAuthenticated()" class="scroll" ><a th:href="@{/reviews}">Reviews</a></li>
+                        <li  sec:authorize="isAuthenticated()" class="scroll" ><a th:href="@{/rent}">Rent</a></li>
+                        <li  sec:authorize="isAuthenticated()" class="scroll" ><a th:href="@{/logout}">Logout</a></li>
 <!--                            <div class="navbar">-->
 <!--                                <div class="dropdown">-->
 <!--                                    <button class="dropBtn">Signup</button>-->
@@ -570,9 +572,8 @@
 
                             <address>
                               <strong>Motor Car Servecing, Inc.</strong><br>
-                              12345 NewYork, Street 125<br>
-                              United States 94107<br>
-                              <abbr title="Phone">P:</abbr> (123) 456-7890
+                              Amman,Jordan<br>
+                              <abbr title="Phone">P:</abbr> 0775491111
                             </address>
 					</div></div>
                     <div class="col-sm-8 col-md-8">
@@ -648,18 +649,24 @@
  <script src="/homeCss/contact/jqBootstrapValidation.js"></script>
  <script src="/homeCss/contact/contact_me.js"></script>
     <script src="/homeCss/js/custom-scripts.js"></script>
-    <script>
-  window.watsonAssistantChatOptions = {
-      integrationID: "0b3ad4c4-00ba-4761-829f-6c3d402d242b", // The ID of this integration.
-      region: "eu-de", // The region your integration is hosted in.
-      serviceInstanceID: "c701e581-59f1-4b36-8de9-99d0be1fce3d", // The ID of your service instance.
-      onLoad: function(instance) { instance.render(); }
-    };
-  setTimeout(function(){
-    const t=document.createElement('script');
-    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js"
-    document.head.appendChild(t);
-  });
-</script>
+    <script type="text/javascript">
+        "use strict";
+        !function () {
+            var a = window.ChatGen || [];
+            if (!a.loaded) {
+                var s = document.createElement('script');
+                s.type = "text/javascript";
+                s.async = true;
+                s.src = "https://app.chatgen.ai/cmp/chat-widget/bot.js";
+                var fs = document.getElementsByTagName('script')[0];
+                fs.parentNode.insertBefore(s, fs);
+                s.onload=function(){
+                    var yourKey = 'WyyWENtX'
+                    var widgetKey = {widget_key: yourKey}
+                    ChatGen.init(widgetKey);
+                }
+            }
+        }();
+    </script>
 </body>
 </html>

@@ -21,7 +21,7 @@
                             <a style="color: #45aed6" class="nav-link active" aria-current="page" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a style="color: #45aed6" class="nav-link" href="#">Dashboard</a>
+                            <a style="color: #45aed6" class="nav-link" href="/appointment-control">Dashboard</a>
                         </li>
                         <form class="d-flex" th:action="@{/logout}" method="post">
                             <button style="background-color: #45aed6; color: whitesmoke; border: none;"
@@ -70,13 +70,13 @@
                             <div style="  display: flex; flex-wrap: wrap; background-color: #f1f1f1; margin: 10px;padding: 20px;font-size: 30px;">
                                 <!--                    <div class="row">-->
 
-                                <div th:each="workShopFeed:${workShopFeeds}" class="feed"
+                                <div  th:each="workShopFeed:${workShopFeeds}"  class="feed"
                                      style=" text-align:justify; text-justify: inter-word;">
 
 
                                     <!--                            <div class="col-sm-5">-->
                                     <div class="card" style="margin-top: 35px; width: 300px; height:500px">
-                                        <img th:src="${workShopFeed.image}" class="card-img-top" alt="..." src=""
+                                        <img  th:src="${workShopFeed.image}" class="card-img-top" alt="..." src=""
                                              style="width:300px; height: 230px;">
                                         <div class="card-body">
 
