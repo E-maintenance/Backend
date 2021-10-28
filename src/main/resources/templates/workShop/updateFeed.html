@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" th:href="@{/updateFeed.css}" type="text/css" media="screen">
+</head>
+<body>
+<form method="POST" th:object="${workShopFeeds}" th:action="@{/shop-update/{id}(id=${workShopFeeds.id})}" >
+
+  <input name="image" placeholder="Share Your Image" class="name" required id="image" type="text" th:field="*{image}"/>
+  <textarea rows="4" cols="50" name="feeds" placeholder="Share Your Feeds" class="message" required id="feeds" type="text" th:field="*{feeds}"></textarea>
+  <input name="submit" class="btn" type="submit" value="SEND" />
+</form>
+</body>
+</html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="en" >-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<form method="POST" th:object="${workShopFeeds}" th:action="@{/shop-update/{id}(id=${workShopFeeds.id})}" >-->
+<!--&lt;!&ndash;  <input type="text" th:field="*{id}">&ndash;&gt;-->
+
+<!--  <h3> Update Feed </h3>-->
+<!--&lt;!&ndash;  <input type="text" th:field="*{firstName}" name="first" >&ndash;&gt;-->
+
+<!--  <div><label for="feeds"> Write Your Feed :  <input id="feeds" type="text" th:field="*{feeds}"></label></div>-->
+
+<!--  <div><label for="image"> Share Your Image :  <input id="image" type="text" th:field="*{image}"></label></div>-->
+
+<!--  <div><input type="submit" value="Submit"/></div>-->
+
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Maps Project</title>
+    <style>
+        #map {
+            height: 800px;
+            width: 800px;
+            margin: 5rem auto;
+        }
+        img.huechange {
+            filter: hue-rotate(120deg);
+        }
+
+.btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
+}
+
+
+    </style>
+    <link rel="stylesheet" th:href="@{/appointment/appointment.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+<body style="text-align:center">
+<input type="hidden" id="jsonBom" th:value='${Shops}'/>
+
+
+<h1><span class="blue">&lt;</span>Click the button to get your coordinates<span class="blue">&gt;</span></h1>
+
+<button class="btn" onclick="getLocation()"><i class="fa fa-map-marker"></i>Try It</button>
+
+<div id="map" style="height:700px; width:100%"></div>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script type="text/javascript">
+
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+        function showPosition(position) {
+            var x= position.coords.latitude ;
+            var y= position.coords.longitude;
+            const apiKey =
+                'pk.eyJ1IjoiYWxmcmVkMjAxNiIsImEiOiJja2RoMHkyd2wwdnZjMnJ0MTJwbnVmeng5In0.E4QbAFjiWLY8k3AFhDtErA';
+
+
+
+            console.log(x)
+            console.log(y)
+            const mymap = L.map('map').setView([x, y], 15);
+
+            L.tileLayer(
+                'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
+                {
+                    maxZoom: 18,
+                    id: 'mapbox/streets-v11',
+                    tileSize: 512,
+                    zoomOffset: -1,
+                    accessToken: apiKey,
+                }
+            ).addTo(mymap);
+
+            // Adding Marker
+
+            const marker = L.marker([x, y]).addTo(mymap);
+            // Add popup message
+            let template = `
+<h3>MY LOCATION</h3>
+`;
+            marker.bindPopup(template);
+
+            // Add circle
+            const circle = L.circle([x, y], {
+                radius: 50,
+                color: 'green',
+                fillColor: 'red',
+                fillOpacity: 0.2,
+            })
+                .addTo(mymap)
+                .bindPopup('I am a circle');
+
+
+            var jsonBom = $('#jsonBom').val().replace("[","").replace("]","").split(", ");
+            console.log(jsonBom);
+
+
+
+            jsonBom.forEach(e =>{
+                var newA= JSON.parse(e);
+                console.log(newA)
+                            const marker1 = L.marker([newA.lat, newA.lon]).addTo(mymap);
+                            marker._icon.classList.add('huechange');
+                            // Add popup message
+                            let template = `
+                <h3 >${newA.shopName}</h3>
+                <p>helloo it me</p>
+
+                <button onclick="window.location.href='/workShopProfile/${newA.id}'">view profile</button>
+                `;
+
+                            marker1.bindPopup(template);
+                            const circle = L.circle([newA.lat, newA.lon], {
+                                radius: 20,
+                                color: 'green',
+                                fillColor: 'red',
+                                fillOpacity: 0.2,
+                            })
+                                .addTo(mymap)
+                                .bindPopup('I am a circle');
+                        });
+                    }
+
+
+           // var w=[[${Shops}]]+"";
+           //     console.log(w);
+
+
+    //         let locations = [
+    //             {
+    //                 lat: '31.979056',
+    //                 lon: '35.954154',
+    //             },
+    //             {
+    //                 lat: '31.976681',
+    //                 lon: ' 35.957823',
+    //             },
+    //             {
+    //                 lat: '31.973423',
+    //                 lon: '35.951407',
+    //             },
+    //             { lat: '31.972094', lon: '35.954905' },
+    //         ];
+    //         locations.map((e) => {
+    //             const marker1 = L.marker([e.lat, e.lon]).addTo(mymap);
+    //             marker._icon.classList.add('huechange');
+    //             // Add popup message
+    //             let template = `
+    // <h3 >Empire State Building</h3>
+    // <div style="text-align:center">
+    //     <img width="150" height="150"src="image.jpg"/>
+    // </div>
+    // `;
+    //             marker1.bindPopup(template);
+    //             const circle = L.circle([e.lat, e.lon], {
+    //                 radius: 20,
+    //                 color: 'green',
+    //                 fillColor: 'red',
+    //                 fillOpacity: 0.2,
+    //             })
+    //                 .addTo(mymap)
+    //                 .bindPopup('I am a circle');
+    //         });
+    //     }
+    }
+
+
+</script>
+
+
+</body>
+</html>
