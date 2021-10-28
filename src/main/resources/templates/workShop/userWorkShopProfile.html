@@ -63,22 +63,32 @@
 <!--                th:onclick="|window.location.href='@{/User/login}'|"-->
               </div>
             </div>
+          <div style="  display: flex; flex-wrap: wrap; background-color: #f1f1f1; margin: 10px;padding: 20px;font-size: 30px;">
+            <!--                    <div class="row">-->
 
-        </div>
+            <div  th:each="workShopFeed:${workShopFeeds}"  class="feed"
+                  style=" text-align:justify; text-justify: inter-word;">
 
-        <div class="row">
-          <div th:each="workShopFeed:${workShopFeeds}" class="feed">
-            <div class="col-sm-5">
-              <div class="card" style="margin-top: 35px;">
-                <img th:src="${workShopFeed.image}" class="card-img-top" alt="..." src="">
+
+              <!--                            <div class="col-sm-5">-->
+              <div class="card" style="margin-top: 35px; width: 300px; height:500px">
+                <img  th:src="${workShopFeed.image}" class="card-img-top" alt="..." src=""
+                      style="width:300px; height: 230px;">
                 <div class="card-body">
-                  <p th:text="${workShopFeed.timeNow}" class="card-text"></p>
+
+                  <p th:text="${workShopFeed.timeNow}" class="card-text"
+                     style="font-size: 15px"></p><br>
+
                   <h5 th:text="${workShopFeed.feeds}" class="card-title"></h5><br>
+
+
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+
       </div>
     </div>
   </div>

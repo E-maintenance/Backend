@@ -75,7 +75,7 @@ public class UserController {
         role.setUser(user);
         userRepository.save(user);
         Verification verified = new Verification(user.getEmail());
-        service.sendSimpleEmail(user.getEmail(),request.getRequestURL().toString()+"/verification/"+verified.getToken(),"please verified Email");
+        service.send(user.getEmail(),service.buildEmail(user.getFullname(),request.getRequestURL().toString()+"/verification/"+verified.getToken()));
         verifiedRepository.save(verified);
         roleRepository.save(role);
         return "redirect:/User/login";
