@@ -1,4 +1,5 @@
 package runtimeTerror.autoCare.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,6 +27,7 @@ public class WorkShopController {
 
     @Autowired
     WorkShopFeedsRepository workShopFeedsRepository;
+
     @Autowired
     UserRepository userRepository;
 
@@ -44,16 +46,12 @@ public class WorkShopController {
     }
 
     @PostMapping("/shop-signup")
-    public String attemptSignUp(@ModelAttribute WorkShop workShop ,@ModelAttribute Location loc) {
-        System.out.println("--------------------------------------------------------------");
-//        System.out.println(workShop);
-//        System.out.println(loc);
-        
+    public String attemptSignUp(@ModelAttribute WorkShop workShop, @ModelAttribute Location loc) {
+
         locationRepository.save(loc);
         workShop.setPassword(passwordEncoder.encode(workShop.getPassword()));
         workShop.setLocation(loc);
         loc.setWorkShop(workShop);
-
 
         workShopRepository.save(workShop);
 
@@ -66,12 +64,7 @@ public class WorkShopController {
     }
 
 
-
-
-
-
-
-    @PostMapping ("/shop-login")
+    @PostMapping("/shop-login")
     public String LoginPage(@RequestParam String username) {
         WorkShop workShop = workShopRepository.findWorkShopByUsername(username);
         Authentication authentication = new UsernamePasswordAuthenticationToken(workShop, null, new ArrayList<>());
@@ -92,18 +85,17 @@ public class WorkShopController {
 
 
     @GetMapping("/workShopProfile/{id}")
-    public String getProfile(Model model , @PathVariable Long id , Principal principal) {
+    public String getProfile(Model model, @PathVariable Long id, Principal principal) {
         List<WorkShopFeeds> workShopFeeds = workShopFeedsRepository.findAllByWorkShop_Id(id).orElseThrow();
         WorkShop proShop = workShopRepository.findWorkShopById(id);
         User user = userRepository.findUserByUsername(principal.getName());
         model.addAttribute("shop_Id", proShop.getId());
-        model.addAttribute("user_Id",user.getId());
-model.addAttribute("workShop",proShop);
+        model.addAttribute("user_Id", user.getId());
+        model.addAttribute("workShop", proShop);
 //        model.addAttribute("workShopFeeds", workShop.getFeeds());
         model.addAttribute("workShopFeeds", workShopFeeds);
         return "workShop/userWorkShopProfile";
     }
-
 
 
     @GetMapping("/feeds")
@@ -126,20 +118,18 @@ model.addAttribute("workShop",proShop);
     }
 
     @GetMapping("/shop-edit/{id}")
-    public String getForm(@PathVariable Long id, Model model ){
-//        List<WorkShopFeeds> workShopFeeds = workShopFeedsRepository.findWorkShopFeedsById(id)
-//                .orElseThrow(() -> new IllegalArgumentException("Invalid Feed Id:" + id));
+    public String getForm(@PathVariable Long id, Model model) {
 
         WorkShopFeeds workShopFeeds = workShopFeedsRepository.findWorkShopFeedsById(id).orElseThrow();
         System.out.println(workShopFeeds.getId());
-        model.addAttribute("workShopFeeds", workShopFeeds );
+        model.addAttribute("workShopFeeds", workShopFeeds);
         return "workShop/updateFeed";
     }
 
     @PostMapping("/shop-update/{id}")
-    public String updateForm(@PathVariable("id") Long id , WorkShopFeeds workShopFeeds,
-                             BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String updateForm(@PathVariable("id") Long id, WorkShopFeeds workShopFeeds,
+                             BindingResult result, Model model) {
+        if (result.hasErrors()) {
             workShopFeeds.setId(id);
             return "workShop/feeds";
         }
@@ -153,13 +143,11 @@ model.addAttribute("workShop",proShop);
     }
 
     @GetMapping("/shop-delete/{id}")
-    public String deleteFeed(@PathVariable("id") Long id, Model model){
+    public String deleteFeed(@PathVariable("id") Long id, Model model) {
         WorkShopFeeds workShopFeeds = workShopFeedsRepository.findWorkShopFeedsById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Feed Id:" + id));
         workShopFeedsRepository.deleteById(id);
         return "redirect:/workShopProfile";
     }
-
-
 
 }

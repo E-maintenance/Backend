@@ -29,16 +29,16 @@ public class UserServiceImpl implements UserDetailsService {
             System.out.print("Username not found");
             throw new UsernameNotFoundException((username + " not found"));
         }
-//        if (!user.isVerified()) {
-//            System.out.print("Please verified your email");
-//            throw new UsernameNotFoundException((username + "Please verified your email"));
-//        }
-        List<GrantedAuthority> grantedAuthority= new ArrayList<>();
+        if (!user.isVerified()) {
+            System.out.print("Please verified your email");
+            throw new UsernameNotFoundException((username + "Please verified your email"));
+        }
+        List<GrantedAuthority> grantedAuthority = new ArrayList<>();
         grantedAuthority.add(new SimpleGrantedAuthority(user.getRole().getName()));
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return  new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),grantedAuthority);
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthority);
     }
 }

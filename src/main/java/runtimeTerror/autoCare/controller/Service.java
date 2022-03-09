@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
-
 @Controller
 public class Service {
 
@@ -19,6 +18,7 @@ public class Service {
     public String rent() {
         return "rentpage";
     }
+
     @GetMapping("/rentnow")
     public String rentcar() {
         return "rentnow";

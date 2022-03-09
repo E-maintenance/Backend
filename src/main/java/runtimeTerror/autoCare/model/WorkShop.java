@@ -24,8 +24,8 @@ public class WorkShop implements UserDetails {
     String password;
     String shopName;
     String category;
-    double num =0;
-    double rate=0;
+    double num = 0;
+    double rate = 0;
 
     public double getRate() {
         return rate;
@@ -33,13 +33,13 @@ public class WorkShop implements UserDetails {
 
     public void setRate(double rate) {
         num++;
-     double x=   this.rate+rate;
-      this.rate=x/num;
+        double x = this.rate + rate;
+        this.rate = x / num;
     }
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id")
-    private Location location ;
+    private Location location;
 
     public Location getLocation() {
         return location;
@@ -48,9 +48,6 @@ public class WorkShop implements UserDetails {
     public void setLocation(Location location) {
         this.location = location;
     }
-
-
-
 
 
     @OneToMany(mappedBy = "feeds")
@@ -72,7 +69,6 @@ public class WorkShop implements UserDetails {
         this.category = category;
 
     }
-
 
 
     @Override
@@ -147,8 +143,8 @@ public class WorkShop implements UserDetails {
     @Override
     public String toString() {
         return
-                 "{"+"\"id\""+":\""+ id +
-                "\"," +"\"username\""+":\""+ username + "\"," +"\"shopName\""+":\""+ shopName +  location.toString()+"\"}"
+                "{" + "\"id\"" + ":\"" + id +
+                        "\"," + "\"username\"" + ":\"" + username + "\"," + "\"shopName\"" + ":\"" + shopName + location.toString() + "\"}"
                 ;
     }
 

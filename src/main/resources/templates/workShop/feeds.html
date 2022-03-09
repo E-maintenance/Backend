@@ -13,11 +13,14 @@
         <form class="form" id="form1" method="post" th:action="@{/feeds}">
 
             <p class="name">
-                <input name="image" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="Share Your Image" id="image" />
+                <input name="image" type="text"
+                       class="validate[required,custom[onlyLetter],length[0,100]] feedback-input"
+                       placeholder="Share Your Image" id="image"/>
             </p>
 
             <p class="text">
-                <textarea name="feeds" class="validate[required,length[6,300]] feedback-input" id="feeds" placeholder="Share Your Feeds"></textarea>
+                <textarea name="feeds" class="validate[required,length[6,300]] feedback-input" id="feeds"
+                          placeholder="Share Your Feeds"></textarea>
             </p>
 
 
@@ -30,27 +33,3 @@
 </div>
 </body>
 </html>
-
-
-
-
-
-
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="https://www.thymeleaf.org" lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h1> ADD YOUR FEEDS </h1>-->
-<!--<form method="POST" th:action="@{/feeds}">-->
-
-<!--    <h3>Add new post here </h3>-->
-<!--    <div><label for="feeds"> Write Your Feed :  <input id="feeds" name="feeds" type="text"></label></div>-->
-<!--    <div><label for="image"> Share Your Image :  <input id="image" name="image" type="text"></label></div>-->
-<!--    <div><input type="submit" value="Submit"/></div>-->
-
-<!--</form>-->
-<!--</body>-->
-<!--</html>-->

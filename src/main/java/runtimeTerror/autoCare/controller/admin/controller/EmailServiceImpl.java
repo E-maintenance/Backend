@@ -21,7 +21,7 @@ import javax.mail.internet.MimeMessage;
 
     public void sendSimpleEmail(String toEmail, String body, String subject) {
             SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom("deyaa.test@gmail.com");
+            message.setFrom("naeemalomari96@gmail.com");
             message.setTo(toEmail);
             message.setText(body);
             message.setSubject(subject);

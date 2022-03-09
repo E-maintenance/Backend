@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
-public class AdminController  {
+public class AdminController {
 
     @Autowired
     private RoleRepository roleRepository;
@@ -34,26 +34,27 @@ public class AdminController  {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    @Autowired    EmailServiceImpl service;
+    @Autowired
+    EmailServiceImpl service;
 
 
     @GetMapping("/admin/register")
-    public String registerAdmin(Model model){
+    public String registerAdmin(Model model) {
         UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
         model.addAttribute("userRegistrationDto", userRegistrationDto);
-        return  "admin/auth/register";
+        return "admin/auth/register";
     }
 
-    @PostMapping ("/admin/register")
-    public String RegisterAdmin(@Valid @ModelAttribute User user, BindingResult result, Model model,HttpServletRequest request) throws MessagingException {
+    @PostMapping("/admin/register")
+    public String RegisterAdmin(@Valid @ModelAttribute User user, BindingResult result, Model model, HttpServletRequest request) throws MessagingException {
         model.addAttribute("userRegistrationDto", user);
         User userExists = userRepository.findUserByUsername(user.getUsername());
         System.out.println(userExists);
-        Role role= roleRepository.findByName("ADMIN");
+        Role role = roleRepository.findByName("ADMIN");
         if (userExists != null && (userExists.getRole().equals("1"))) {
             return "redirect:/admin/register?username";
         }
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return "admin/auth/register";
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -61,15 +62,15 @@ public class AdminController  {
         role.setUser(user);
         userRepository.save(user);
         Verification verified = new Verification(user.getEmail());
-       String fun = service.buildEmail(user.getFullname(),request.getRequestURL().toString()+"/verification/"+verified.getToken());
-        service.send(user.getEmail(),fun);
-       verifiedRepository.save(verified);
+        String fun = service.buildEmail(user.getFullname(), request.getRequestURL().toString() + "/verification/" + verified.getToken());
+        service.send(user.getEmail(), fun);
+        verifiedRepository.save(verified);
         roleRepository.save(role);
         return "redirect:/admin/register?success";
     }
 
     @GetMapping("/admin/login")
-    public String loginAdmin(){
+    public String loginAdmin() {
         return "admin/auth/login";
     }
 
@@ -79,9 +80,9 @@ public class AdminController  {
     }
 
     @GetMapping("/admin/register/verification/{token}")
-    public String verificationEmail(Model m, @PathVariable String token){
+    public String verificationEmail(Model m, @PathVariable String token) {
         Verification verified = verifiedRepository.findVerificationByToken(token);
-        if (verified==null){
+        if (verified == null) {
             return "error/404";
         }
         User user = userRepository.findUserByEmail(verified.getUserEmail());

@@ -44,6 +44,7 @@
                     P<br>R<br>O<BR>F<BR>I<BR>L<br>E
                 </h2>
             </div>
+
             <div class="col-sm-11">
                 <div class="row">
                     <form th:action="@{/feeds}" method="get">
@@ -59,7 +60,8 @@
                                     Name : <span th:text="${workShop.shopName}" class="card-text"></span></h4><br>
                                 <h4 style="color: #555; font-family: 'Poppins', sans-serif; font-weight:bold;"> WorkShop
                                     Category : <span th:text="${workShop.category}" class="card-text"></span></h4><br>
-                                <h4 style="color: #555; font-family: 'Poppins', sans-serif; font-weight:bold;"> WorkShop Rate   : <span th:text="${workShop.rate}" class="card-text"></span></h4><br>
+                                <h4 style="color: #555; font-family: 'Poppins', sans-serif; font-weight:bold;"> WorkShop
+                                    Rate : <span th:text="${workShop.rate}" class="card-text"></span></h4><br>
                                 <br>
                                 <button type="submit" th:name="action" th:value="in" class="btn btn-primary"> ADD Your
                                     Feed
@@ -70,13 +72,13 @@
                             <div style="  display: flex; flex-wrap: wrap; background-color: #f1f1f1; margin: 10px;padding: 20px;font-size: 30px;">
                                 <!--                    <div class="row">-->
 
-                                <div  th:each="workShopFeed:${workShopFeeds}"  class="feed"
+                                <div th:each="workShopFeed:${workShopFeeds}" class="feed"
                                      style=" text-align:justify; text-justify: inter-word;">
 
 
                                     <!--                            <div class="col-sm-5">-->
                                     <div class="card" style="margin-top: 35px; width: 300px; height:500px">
-                                        <img  th:src="${workShopFeed.image}" class="card-img-top" alt="..." src=""
+                                        <img th:src="${workShopFeed.image}" class="card-img-top" alt="..." src=""
                                              style="width:300px; height: 230px;">
                                         <div class="card-body">
 

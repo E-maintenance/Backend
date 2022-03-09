@@ -13,12 +13,7 @@ public class Verification {
 
     private String userEmail;
 
-
-
-
-
-
-    private String token= new Random().ints(48, 122 + 1)
+    private String token = new Random().ints(48, 122 + 1)
             .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
             .limit(20)
             .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)

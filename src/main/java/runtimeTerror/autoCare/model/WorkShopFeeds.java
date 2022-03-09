@@ -16,18 +16,15 @@ public class WorkShopFeeds {
 
     String feeds;
     String image;
-
-
     long timeNow = new Date().getTime();
 
     @ManyToOne
-    @JoinColumn(name="workshop_id")
+    @JoinColumn(name = "workshop_id")
     private WorkShop workShop;
 
 
     public WorkShopFeeds() {
     }
-
 
     public WorkShopFeeds(String feeds, String image, WorkShop workShop) {
         this.feeds = feeds;
@@ -61,23 +58,17 @@ public class WorkShopFeeds {
         String time = "";
 
         long defTime = new Date().getTime() - timeNow;
-        if(defTime < 1000*60){
+        if (defTime < 1000 * 60) {
             time = TimeUnit.MILLISECONDS.toSeconds(defTime) + " seconds ago";
-        }
-
-        else if(defTime < 1000*60*60){
-            time =  TimeUnit.MILLISECONDS.toMinutes(defTime) + " minutes ago";
-        }
-
-        else if(defTime < 1000*60*60*60){
+        } else if (defTime < 1000 * 60 * 60) {
+            time = TimeUnit.MILLISECONDS.toMinutes(defTime) + " minutes ago";
+        } else if (defTime < 1000 * 60 * 60 * 60) {
             time = TimeUnit.MILLISECONDS.toHours(defTime) + " hours ago";
-        }
-
-        else if(defTime < (long) 1000*60*60*60*24){
+        } else if (defTime < (long) 1000 * 60 * 60 * 60 * 24) {
             time = TimeUnit.MILLISECONDS.toDays(defTime) + " days ago";
         }
 
-         return time;
+        return time;
     }
 
     public void setTimeNow(long timeNow) {
